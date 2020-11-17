@@ -1,0 +1,8 @@
+{
+  "registry-mirrors": [],
+  "insecure-registries": [
+    "192.168.2.2:5000"
+  ],
+  "debug": false,
+  "experimental": true
+}
