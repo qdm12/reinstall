@@ -78,6 +78,9 @@ pacman -U --noconfirm yay*.tar.zst
 cd "$originPath"
 rm -r /tmp/yay "/home/$USER/.cache"
 
+echo "==> Installing downgrade"
+su "$USER" -c "yay -Sy --noconfirm downgrade"
+
 echo "==> Setting up Shell"
 pacman -Sy -q --needed --noconfirm zsh
 export EDITOR=nano
