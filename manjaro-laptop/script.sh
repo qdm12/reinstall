@@ -68,14 +68,13 @@ mkdir /tmp/yay
 cd /tmp/yay
 git clone --single-branch --depth 1 https://aur.archlinux.org/yay.git .
 pacman -Sy -q --needed --noconfirm go
-mkdir -p /.cache
-chown -R nobody /tmp/yay /.cache
-sudo -u nobody makepkg
+mkdir -p "/home/$USER/.cache"
+chown -R "$USER" /tmp/yay /.cache
+sudo -u nonroot makepkg
 pacman -R --noconfirm go
 pacman -U --noconfirm yay*.tar.zst
 cd "$originPath"
-rm -r /tmp/yay /.cache
-yay --noconfirm
+rm -r /tmp/yay "/home/$USER/.cache"
 
 echo "==> Setting up Shell"
 pacman -Sy -q --needed --noconfirm zsh
