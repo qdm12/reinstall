@@ -67,20 +67,25 @@ systemctl restart sshd
 echo "==> Installing some basic packages"
 pacman -Sy -q --needed --noconfirm ca-certificates which tree git sudo base-devel mosh ca-certificates
 
+echo "==> Setting up non root user for yay"
+useradd -m nonroot
+mkdir -p /etc/sudoers.d
+echo nonroot ALL=\(root\) NOPASSWD:ALL > /etc/sudoers.d/nonroot
+chmod 0440 /etc/sudoers.d/nonroot
+
 echo "==> Installing yay"
 originPath="$(pwd)"
 mkdir /tmp/yay
 cd /tmp/yay
 git clone --single-branch --depth 1 https://aur.archlinux.org/yay.git .
 pacman -Sy -q --needed --noconfirm go
-mkdir -p /.cache
-chown -R nobody /tmp/yay /.cache
-sudo -u nobody makepkg
+mkdir -p /home/nonroot/.cache
+chown -R nonroot /tmp/yay /.cache
+sudo -u nonroot makepkg
 pacman -R --noconfirm go
 pacman -U --noconfirm yay*.tar.zst
 cd "$originPath"
-rm -r /tmp/yay /.cache
-yay --noconfirm
+rm -r /tmp/yay /home/nonroot/.cache
 
 echo "==> Setting up Shell"
 pacman -Sy -q --needed --noconfirm zsh
