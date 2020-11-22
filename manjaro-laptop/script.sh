@@ -123,6 +123,9 @@ EOL
 echo "==> Setting up VSCode"
 yay -S --noconfirm visual-studio-code-bin
 code --install-extension ms-vscode-remote.remote-containers
+code --install-extension ms-azuretools.vscode-docker
+code --install-extension davidanson.vscode-markdownlint
+code --install-extension redhat.vscode-yaml
 
 echo "==> Setting up Go and pprof"
 pacman -Sy --noconfirm go graphviz
