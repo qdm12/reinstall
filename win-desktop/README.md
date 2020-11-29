@@ -40,8 +40,18 @@ Right click on script.ps1 and select Run with Powershell
 
 - Shadowsocks config export
 - Wireguard config export
-- Redo taskband.reg
-- Update files of desktop, start menu
+- Update files of desktop
+- Export Taskband:
+
+    ```powershell
+    reg export HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Taskband taskband.reg
+    ```
+
+- Export File extensions:
+
+    ```powershell
+    reg export HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts fileexts.reg
+    ```
 
 ### Sometime
 
