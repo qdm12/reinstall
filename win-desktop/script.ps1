@@ -906,21 +906,50 @@ function InstallChocolatey {
 
 function InstallChocoPackages {
     Write-Output "Installing Choco packages..."
-    choco install vcredist2015 --version=14.0.24212.20160825
-    choco install wget curl make unzip nmap ffmpeg iperf3 netcat rufus
-    choco install notepadplusplus git microsoft-windows-terminal powershell-core MobaXTerm
-    choco install winrar 7zip chromium ccleaner vlc shutup10 wireguard
-    choco install vscode docker-desktop docker-compose postman gource adb AndroidStudio graphviz
-    choco install greenshot
-    choco install adobereader libreoffice pdfcreator
-    choco install filezilla shadowsocks
-    choco install discord
+    # VS Redist for programs and games
+    choco install vcredist2015 --version=14.0.24212.20160825 `
+        vcredist140 vcredist2008 vcredist2010 vcredist2012 `
+        vcredist2013 vcredist2015 vcredist2017 directx
+    # Network CLIs
+    choco install wget curl iperf3 netcat
+    # Compression
+    choco install unzip winrar 7zip
+    # Terminal
+    choco install git microsoft-windows-terminal powershell-core colortool MobaXTerm
+    # Browser
+    choco install chromium
+    # File editing
+    choco install vscode
+    # Hardware
+    choco install disable-nvidia-telemetry ddu defraggler `
+    msiafterburner evga-precision-x1 `
+    valley-benchmark
+    # Development
+    choco install docker-desktop docker-compose postman gource adb AndroidStudio graphviz
+    # Windows tweaks
+    choco install shutup10
+    # Other useful programs
+    choco install ccleaner vlc
+    # Video editing
+    choco install ffmpeg mediainfo handbrake mkvtoolnix MakeMKV shotcut obs-studio
+    # Image editing
     choco install InkScape photofiltre7 gimp
+    # Audio editing
+    choco install lame audacity
+    # Networking
+    choco install wireguard parsec shadowsocks filezilla
+    # Screenshots
+    choco install greenshot screentogif
+    # Communication
+    choco install discord signal
+    # Download
     choco install youtube-dl qbittorrent
-    choco install reflect-free
-    choco install handbrake mkvtoolnix MakeMKV imgburn shotcut obs-studio
-    choco install directx disable-nvidia-telemetry ddu defraggler msiafterburner steam origin
-    # nvidia-display-driver
+    # ISO manipulation
+    choco install reflect-free rufus imgburn
+    # Office documents
+    choco install adobereader libreoffice pdfcreator
+    # Gaming
+    choco install logitechgaming steam origin
 }
 
 function CleanContextMenu {
@@ -946,8 +975,8 @@ function CleanContextMenu {
 
 function CleanStartup {
     Write-Output "Cleaning up startup programs..."
-    Remove-ItemProperty -path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" -Name "Discord" -ErrorAction SilentlyContinue
-    Remove-ItemProperty -path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" -Name "SunJavaUpdateSched" -ErrorAction SilentlyContinue
+    Remove-ItemProperty -path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" -Name Discord -ErrorAction SilentlyContinue
+    Remove-ItemProperty -path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" -Name SunJavaUpdateSched -ErrorAction SilentlyContinue
     Remove-ItemProperty -path 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Run' -Name Steam
 }
 
