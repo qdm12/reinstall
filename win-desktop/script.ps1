@@ -1053,14 +1053,15 @@ function InstallExes {
 
 function InstallVSCodeExtensions {
     Write-Output "Installing VSCode extensions..."
-    Start-Process -FilePath "$env:PROGRAMFILES\Microsoft VS Code\bin\code.cmd" -ArgumentList "--install-extension Dart-Code.dart-code" -NoNewWindow -Wait
-    Start-Process -FilePath "$env:PROGRAMFILES\Microsoft VS Code\bin\code.cmd" -ArgumentList "--install-extension Dart-Code.flutter" -NoNewWindow -Wait
     Start-Process -FilePath "$env:PROGRAMFILES\Microsoft VS Code\bin\code.cmd" -ArgumentList "--install-extension axetroy.vscode-imagemin" -NoNewWindow -Wait
     Start-Process -FilePath "$env:PROGRAMFILES\Microsoft VS Code\bin\code.cmd" -ArgumentList "--install-extension bierner.emojisense" -NoNewWindow -Wait
     Start-Process -FilePath "$env:PROGRAMFILES\Microsoft VS Code\bin\code.cmd" -ArgumentList "--install-extension bierner.markdown-preview-github-styles" -NoNewWindow -Wait
     Start-Process -FilePath "$env:PROGRAMFILES\Microsoft VS Code\bin\code.cmd" -ArgumentList "--install-extension cssho.vscode-svgviewer" -NoNewWindow -Wait
+    Start-Process -FilePath "$env:PROGRAMFILES\Microsoft VS Code\bin\code.cmd" -ArgumentList "--install-extension Dart-Code.dart-code" -NoNewWindow -Wait
+    Start-Process -FilePath "$env:PROGRAMFILES\Microsoft VS Code\bin\code.cmd" -ArgumentList "--install-extension Dart-Code.flutter" -NoNewWindow -Wait
     Start-Process -FilePath "$env:PROGRAMFILES\Microsoft VS Code\bin\code.cmd" -ArgumentList "--install-extension DavidAnson.vscode-markdownlint" -NoNewWindow -Wait
     Start-Process -FilePath "$env:PROGRAMFILES\Microsoft VS Code\bin\code.cmd" -ArgumentList "--install-extension eamodio.gitlens" -NoNewWindow -Wait
+    Start-Process -FilePath "$env:PROGRAMFILES\Microsoft VS Code\bin\code.cmd" -ArgumentList "--install-extension earshinov.permute-lines" -NoNewWindow -Wait
     Start-Process -FilePath "$env:PROGRAMFILES\Microsoft VS Code\bin\code.cmd" -ArgumentList "--install-extension GitHub.vscode-pull-request-github" -NoNewWindow -Wait
     Start-Process -FilePath "$env:PROGRAMFILES\Microsoft VS Code\bin\code.cmd" -ArgumentList "--install-extension GrapeCity.gc-excelviewer" -NoNewWindow -Wait
     Start-Process -FilePath "$env:PROGRAMFILES\Microsoft VS Code\bin\code.cmd" -ArgumentList "--install-extension Gruntfuggly.todo-tree" -NoNewWindow -Wait
@@ -1070,9 +1071,12 @@ function InstallVSCodeExtensions {
     Start-Process -FilePath "$env:PROGRAMFILES\Microsoft VS Code\bin\code.cmd" -ArgumentList "--install-extension mohsen1.prettify-json" -NoNewWindow -Wait
     Start-Process -FilePath "$env:PROGRAMFILES\Microsoft VS Code\bin\code.cmd" -ArgumentList "--install-extension ms-azuretools.vscode-docker" -NoNewWindow -Wait
     Start-Process -FilePath "$env:PROGRAMFILES\Microsoft VS Code\bin\code.cmd" -ArgumentList "--install-extension ms-vscode-remote.remote-containers" -NoNewWindow -Wait
+    Start-Process -FilePath "$env:PROGRAMFILES\Microsoft VS Code\bin\code.cmd" -ArgumentList "--install-extension ms-vscode-remote.remote-ssh" -NoNewWindow -Wait
     Start-Process -FilePath "$env:PROGRAMFILES\Microsoft VS Code\bin\code.cmd" -ArgumentList "--install-extension ms-vscode-remote.vscode-remote-extensionpack" -NoNewWindow -Wait
     Start-Process -FilePath "$env:PROGRAMFILES\Microsoft VS Code\bin\code.cmd" -ArgumentList "--install-extension ms-vscode.powershell" -NoNewWindow -Wait
+    Start-Process -FilePath "$env:PROGRAMFILES\Microsoft VS Code\bin\code.cmd" -ArgumentList "--install-extension ms-vsliveshare.vsliveshare" -NoNewWindow -Wait
     Start-Process -FilePath "$env:PROGRAMFILES\Microsoft VS Code\bin\code.cmd" -ArgumentList "--install-extension pnp.polacode" -NoNewWindow -Wait
+    Start-Process -FilePath "$env:PROGRAMFILES\Microsoft VS Code\bin\code.cmd" -ArgumentList "--install-extension redhat.vscode-commons" -NoNewWindow -Wait
     Start-Process -FilePath "$env:PROGRAMFILES\Microsoft VS Code\bin\code.cmd" -ArgumentList "--install-extension redhat.vscode-yaml" -NoNewWindow -Wait
     Start-Process -FilePath "$env:PROGRAMFILES\Microsoft VS Code\bin\code.cmd" -ArgumentList "--install-extension shardulm94.trailing-spaces" -NoNewWindow -Wait
     Start-Process -FilePath "$env:PROGRAMFILES\Microsoft VS Code\bin\code.cmd" -ArgumentList "--install-extension Tyriar.sort-lines" -NoNewWindow -Wait
