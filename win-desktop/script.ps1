@@ -884,14 +884,13 @@ function InstallChocoPackages {
     choco install vscode
     # Hardware
     choco install disable-nvidia-telemetry ddu defraggler `
-    msiafterburner evga-precision-x1 `
-    valley-benchmark
+        msiafterburner valley-benchmark cinebench
     # Development
     choco install wsl2 docker-desktop docker-compose postman gource adb AndroidStudio graphviz
     # Windows tweaks
     choco install shutup10
     # Other useful programs
-    choco install ccleaner vlc
+    choco install ccleaner vlc treesizefree
     # Video editing
     choco install ffmpeg mediainfo handbrake mkvtoolnix MakeMKV shotcut obs-studio
     # Image editing
@@ -911,7 +910,7 @@ function InstallChocoPackages {
     # Office documents
     choco install adobereader libreoffice pdfcreator
     # Gaming
-    choco install logitechgaming steam origin
+    choco install logitechgaming steam origin epicgameslauncher
 }
 
 function CleanContextMenu {
