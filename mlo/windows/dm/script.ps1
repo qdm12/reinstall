@@ -1,7 +1,7 @@
 param( $path )
 If (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]"Administrator")) {
-   Start-Process powershell.exe "-NoProfile -ExecutionPolicy Bypass -File `"$PSCommandPath`" $PSCommandArgs -path $pwd" -Verb RunAs
-   Exit
+    Start-Process powershell.exe "-NoProfile -ExecutionPolicy Bypass -File `"$PSCommandPath`" $PSCommandArgs -path $pwd" -Verb RunAs
+    Exit
 }
 Set-Location $path
 Write-Output "Starting in $pwd"
@@ -269,7 +269,7 @@ Function DisableActivityHistory {
 
 Function DisableBackgroundApps {
     Write-Output "Disabling Background application access..."
-    Get-ChildItem -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\BackgroundAccessApplications" -Exclude "Microsoft.Windows.Cortana*","Microsoft.Windows.ShellExperienceHost*" | ForEach-Object {
+    Get-ChildItem -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\BackgroundAccessApplications" -Exclude "Microsoft.Windows.Cortana*", "Microsoft.Windows.ShellExperienceHost*" | ForEach-Object {
         New-ItemProperty -Force -Path $_.PsPath -Name "Disabled" -PropertyType DWord -Value 1 | Out-Null
         New-ItemProperty -Force -Path $_.PsPath -Name "DisabledByUser" -PropertyType DWord -Value 1 | Out-Null
     }
@@ -350,7 +350,8 @@ Function SetP2PUpdateDisable {
             New-Item -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\DeliveryOptimization\Config" | Out-Null
         }
         New-ItemProperty -Force -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\DeliveryOptimization\Config" -Name "DODownloadMode" -PropertyType DWord -Value 0 | Out-Null
-    } Else {
+    }
+    Else {
         # Method used since 1511
         If (!(Test-Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\DeliveryOptimization")) {
             New-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\DeliveryOptimization" | Out-Null
@@ -640,9 +641,10 @@ Function UnpinStartMenuTiles {
             $data = $data.Substring(0, $data.IndexOf(",0,202,30") + 9) + ",0,202,80,0,0"
             Set-ItemProperty -Path "$($_.PsPath)\Current" -Name "Data" -Type Binary -Value $data.Split(",")
         }
-    } ElseIf ([System.Environment]::OSVersion.Version.Build -ge 17134) {
+    }
+    ElseIf ([System.Environment]::OSVersion.Version.Build -ge 17134) {
         $key = Get-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\CloudStore\Store\Cache\DefaultAccount\*start.tilegrid`$windows.data.curatedtilecollection.tilecollection\Current"
-        $data = $key.Data[0..25] + ([byte[]](202,50,0,226,44,1,1,0,0))
+        $data = $key.Data[0..25] + ([byte[]](202, 50, 0, 226, 44, 1, 1, 0, 0))
         Set-ItemProperty -Path $key.PSPath -Name "Data" -Type Binary -Value $data
         Stop-Process -Name "ShellExperienceHost" -Force -ErrorAction SilentlyContinue
     }
@@ -663,7 +665,8 @@ Function EnableVerboseStatus {
     Write-Output "Enabling verbose startup/shutdown status messages..."
     If ((Get-CimInstance -Class "Win32_OperatingSystem").ProductType -eq 1) {
         New-ItemProperty -Force -Path "HKLM:\Software\Microsoft\Windows\CurrentVersion\Policies\System" -Name "VerboseStatus" -PropertyType DWord -Value 1 | Out-Null
-    } Else {
+    }
+    Else {
         Remove-ItemProperty -Path "HKLM:\Software\Microsoft\Windows\CurrentVersion\Policies\System" -Name "VerboseStatus" -ErrorAction SilentlyContinue
     }
 }
@@ -1041,7 +1044,8 @@ Function InstallPowerShellV2 {
     Write-Output "Installing PowerShell 2.0 Environment..."
     If ((Get-CimInstance -Class "Win32_OperatingSystem").ProductType -eq 1) {
         Enable-WindowsOptionalFeature -Online -FeatureName "MicrosoftWindowsPowerShellV2Root" -NoRestart -WarningAction SilentlyContinue | Out-Null
-    } Else {
+    }
+    Else {
         Install-WindowsFeature -Name "PowerShell-V2" -WarningAction SilentlyContinue | Out-Null
     }
 }
@@ -1060,7 +1064,8 @@ Function InstallHyperV {
     Write-Output "Installing Hyper-V..."
     If ((Get-CimInstance -Class "Win32_OperatingSystem").ProductType -eq 1) {
         Enable-WindowsOptionalFeature -Online -FeatureName "Microsoft-Hyper-V-All" -NoRestart -WarningAction SilentlyContinue | Out-Null
-    } Else {
+    }
+    Else {
         Install-WindowsFeature -Name "Hyper-V" -IncludeManagementTools -WarningAction SilentlyContinue | Out-Null
     }
 }
@@ -1069,7 +1074,8 @@ Function InstallNET23 {
     Write-Output "Installing .NET Framework 2.0, 3.0 and 3.5 runtimes..."
     If ((Get-CimInstance -Class "Win32_OperatingSystem").ProductType -eq 1) {
         Enable-WindowsOptionalFeature -Online -FeatureName "NetFx3" -NoRestart -WarningAction SilentlyContinue | Out-Null
-    } Else {
+    }
+    Else {
         Install-WindowsFeature -Name "NET-Framework-Core" -WarningAction SilentlyContinue | Out-Null
     }
 }
@@ -1179,8 +1185,8 @@ function CleanStartup {
 
 function CleanDirectories {
     Write-Output "Cleaning up user directories..."
-    Get-ChildItem -Path "$env:USERPROFILE\Desktop" -Include * -Recurse | ForEach-Object { $_.Delete()}
-    Get-ChildItem -Path "$env:USERPROFILE\Documents" -Include * -Recurse | ForEach-Object { $_.Delete()}
+    Get-ChildItem -Path "$env:USERPROFILE\Desktop" -Include * -Recurse | ForEach-Object { $_.Delete() }
+    Get-ChildItem -Path "$env:USERPROFILE\Documents" -Include * -Recurse | ForEach-Object { $_.Delete() }
     Remove-Item -Path "$env:USERPROFILE\Pictures" -Force -Recurse -ErrorAction SilentlyContinue
     Remove-Item -Path "$env:USERPROFILE\Videos" -Force -Recurse -ErrorAction SilentlyContinue
     Remove-Item -Path "$env:USERPROFILE\Music" -Force -Recurse -ErrorAction SilentlyContinue
@@ -1210,22 +1216,22 @@ function QuickAccessPinning {
     Write-Output "Unpinning default quick access pins..."
     $QuickAccess = new-object -com shell.application
     $Objects = $QuickAccess.Namespace("shell:::{679f85cb-0220-4080-b29b-5540cc05aab6}").Items()
-    $TargetObject = $Objects | Where-Object {$_.Path -eq "$env:USERPROFILE\Pictures"}
+    $TargetObject = $Objects | Where-Object { $_.Path -eq "$env:USERPROFILE\Pictures" }
     if ($TargetObject) {
         $TargetObject.InvokeVerb("unpinfromhome")
-	}
-    $TargetObject = $Objects | Where-Object {$_.Path -eq "$env:USERPROFILE\Documents"}
+    }
+    $TargetObject = $Objects | Where-Object { $_.Path -eq "$env:USERPROFILE\Documents" }
     if ($TargetObject) {
         $TargetObject.InvokeVerb("unpinfromhome")
-	}
+    }
 }
 
 function Shutup10 {
     Write-Output "Running Shutup10..."
     Start-Process -FilePath "$env:PROGRAMDATA\chocolatey\bin\OOSU10.exe" -ArgumentList "ooshutup10.cfg /quiet" -NoNewWindow -Wait
     Start-Sleep -s 5
-	# TODO at the end
-	Remove-Item -Path "OOSU10.ini" -ErrorAction SilentlyContinue
+    # TODO at the end
+    Remove-Item -Path "OOSU10.ini" -ErrorAction SilentlyContinue
 }
 
 function InstallPsCorePackages {
@@ -1234,7 +1240,7 @@ function InstallPsCorePackages {
     Install-Module oh-my-posh -Force
 }
 
-function InstallExes{
+function InstallExes {
     Write-Output "Installing EXEs..."
     Start-Process setup\acrobatxi.exe -Wait
     Start-Process setup\luxtrust.exe -Wait

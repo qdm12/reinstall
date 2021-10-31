@@ -1,7 +1,7 @@
 param( $path )
 If (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]"Administrator")) {
-   Start-Process powershell.exe "-NoProfile -ExecutionPolicy Bypass -File `"$PSCommandPath`" $PSCommandArgs -path $pwd" -Verb RunAs
-   Exit
+    Start-Process powershell.exe "-NoProfile -ExecutionPolicy Bypass -File `"$PSCommandPath`" $PSCommandArgs -path $pwd" -Verb RunAs
+    Exit
 }
 Set-Location $path
 Write-Output "Starting in $pwd"
@@ -248,7 +248,7 @@ Function DisableActivityHistory {
 
 Function DisableBackgroundApps {
     Write-Output "Disabling Background application access..."
-    Get-ChildItem -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\BackgroundAccessApplications" -Exclude "Microsoft.Windows.Cortana*","Microsoft.Windows.ShellExperienceHost*" | ForEach-Object {
+    Get-ChildItem -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\BackgroundAccessApplications" -Exclude "Microsoft.Windows.Cortana*", "Microsoft.Windows.ShellExperienceHost*" | ForEach-Object {
         New-ItemProperty -Force -Path $_.PsPath -Name "Disabled" -PropertyType DWord -Value 1 | Out-Null
         New-ItemProperty -Force -Path $_.PsPath -Name "DisabledByUser" -PropertyType DWord -Value 1 | Out-Null
     }
@@ -529,7 +529,8 @@ Function EnableVerboseStatus {
     Write-Output "Enabling verbose startup/shutdown status messages..."
     If ((Get-CimInstance -Class "Win32_OperatingSystem").ProductType -eq 1) {
         New-ItemProperty -Force -Path "HKLM:\Software\Microsoft\Windows\CurrentVersion\Policies\System" -Name "VerboseStatus" -PropertyType DWord -Value 1 | Out-Null
-    } Else {
+    }
+    Else {
         Remove-ItemProperty -Path "HKLM:\Software\Microsoft\Windows\CurrentVersion\Policies\System" -Name "VerboseStatus" -ErrorAction SilentlyContinue
     }
 }
@@ -793,7 +794,8 @@ Function InstallNET23 {
     Write-Output "Installing .NET Framework 2.0, 3.0 and 3.5 runtimes..."
     If ((Get-CimInstance -Class "Win32_OperatingSystem").ProductType -eq 1) {
         Enable-WindowsOptionalFeature -Online -FeatureName "NetFx3" -NoRestart | Out-Null
-    } Else {
+    }
+    Else {
         Install-WindowsFeature -Name "NET-Framework-Core" | Out-Null
     }
 }
@@ -895,8 +897,8 @@ function CleanStartup {
 
 function CleanDirectories {
     Write-Output "Cleaning up user directories..."
-    Get-ChildItem -Path "$env:USERPROFILE\Desktop" -Include * -Recurse | ForEach-Object { $_.Delete()}
-    Get-ChildItem -Path "$env:USERPROFILE\Documents" -Include * -Recurse | ForEach-Object { $_.Delete()}
+    Get-ChildItem -Path "$env:USERPROFILE\Desktop" -Include * -Recurse | ForEach-Object { $_.Delete() }
+    Get-ChildItem -Path "$env:USERPROFILE\Documents" -Include * -Recurse | ForEach-Object { $_.Delete() }
     Remove-Item -Path "$env:USERPROFILE\Pictures" -Force -Recurse
     Remove-Item -Path "$env:USERPROFILE\Videos" -Force -Recurse
     Remove-Item -Path "$env:USERPROFILE\Music" -Force -Recurse
@@ -915,14 +917,14 @@ function QuickAccessPinning {
     Write-Output "Unpinning default quick access pins..."
     $QuickAccess = new-object -com shell.application
     $Objects = $QuickAccess.Namespace("shell:::{679f85cb-0220-4080-b29b-5540cc05aab6}").Items()
-    $TargetObject = $Objects | Where-Object {$_.Path -eq "$env:USERPROFILE\Pictures"}
+    $TargetObject = $Objects | Where-Object { $_.Path -eq "$env:USERPROFILE\Pictures" }
     if ($TargetObject) {
         $TargetObject.InvokeVerb("unpinfromhome")
-	}
-    $TargetObject = $Objects | Where-Object {$_.Path -eq "$env:USERPROFILE\Documents"}
+    }
+    $TargetObject = $Objects | Where-Object { $_.Path -eq "$env:USERPROFILE\Documents" }
     if ($TargetObject) {
         $TargetObject.InvokeVerb("unpinfromhome")
-	}
+    }
 }
 
 function TaskbarPinning {
@@ -940,7 +942,7 @@ function Shutup10 {
     Start-Process -FilePath "$env:PROGRAMDATA\chocolatey\bin\OOSU10.exe" -ArgumentList "ooshutup10.cfg /quiet" -NoNewWindow -Wait
 }
 
-function InstallExes{
+function InstallExes {
     Write-Output "Installing EXEs..."
 }
 
