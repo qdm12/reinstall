@@ -856,7 +856,7 @@ function MorePrivacyTweaks {
 function CustomizePath {
     Write-Output "Customizing path..."
     $oldpath = (Get-ItemProperty -Path 'Registry::HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Session Manager\Environment' -Name PATH).path
-    $newpath = "$oldpath"
+    $newpath = "$oldpath;E:\Work\github\derivatex\"
     Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Session Manager\Environment' -Name PATH -Value $newPath
 }
 
