@@ -102,10 +102,11 @@ git clone --single-branch --depth 1 https://github.com/romkatv/powerlevel10k.git
 wget -O ~/welcome https://github.com/qdm12/welcome/releases/download/v0.1.1/welcome_0.1.1_linux_amd64
 
 echo "==> Setting Kernel modules"
-modprobe zfs nfs
+modprobe zfs nfs nfsd
 mkdir -p /etc/modules-load.d/
 echo "zfs" >> /etc/modules-load.d/zfs.conf
 echo "nfs" >> /etc/modules-load.d/nfs.conf
+echo "nfsd" >> /etc/modules-load.d/nfsd.conf
 
 echo "==> Setting Docker"
 pacman -Sy -q --needed --noconfirm docker
