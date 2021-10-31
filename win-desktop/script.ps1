@@ -892,7 +892,7 @@ function InstallChocoPackages {
     # Other useful programs
     choco install ccleaner vlc treesizefree
     # Video editing
-    choco install ffmpeg mediainfo handbrake mkvtoolnix MakeMKV shotcut obs-studio
+    choco install ffmpeg mediainfo handbrake mkvtoolnix MakeMKV shotcut obs-studio lossless-cut
     # Image editing
     choco install InkScape photofiltre7 gimp
     # Audio editing
