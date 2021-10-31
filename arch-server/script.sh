@@ -111,8 +111,13 @@ echo "==> Setting Docker"
 pacman -Sy -q --needed --noconfirm docker
 echo '{"experimental":true,"data-root":"/mnt/configs/docker-data-root","metrics-addr":"127.0.0.1:9323","log-driver":"loki","log-opts":{"loki-url": "http://127.0.0.1:3100/loki/api/v1/push"},"features":{"buildkit":true}}' > /etc/docker/daemon.json
 systemctl enable --now docker
-DOCKER_COMPOSE_VERSION=1.27.4
-wget -qO /usr/local/bin/docker-compose https://github.com/docker/compose/releases/download/$DOCKER_COMPOSE_VERSION/docker-compose-Linux-x86_64
-chmod 500 /usr/local/bin/docker-compose
+mkdir -p /root/.docker/cli-plugins
+docker pull "qmcgaw/binpot:compose-v2.0.1" && \
+  containerid="$(docker create qmcgaw/binpot:compose-v2.0.1)" && \
+  docker cp "$containerid:/bin" "/root/.docker/cli-plugins/docker-compose" && \
+  docker rm "$containerid"
+export COMPOSE_DOCKER_CLI_BUILD=1
+echo "export COMPOSE_DOCKER_CLI_BUILD=1" >> /root/.zshrc
+echo "alias docker-compose='docker compose'" >> /root/.zshrc
 docker network create fries --subnet=10.0.0.0/24
 docker plugin install grafana/loki-docker-driver:latest --alias loki --grant-all-permissions
