@@ -1135,7 +1135,7 @@ function InstallChocoPackages {
     # windows
     choco install vcredist140 vcredist2008 vcredist2010 vcredist2012 vcredist2013 vcredist2015
     # vital
-    choco install notepadplusplus microsoft-windows-terminal powershell-core winrar 7zip chromium firefox ccleaner vlc
+    choco install notepadplusplus microsoft-windows-terminal powershell-core 7zip chromium firefox ccleaner vlc
     # tweaking
     choco install shutup10
     # image editing
@@ -1155,7 +1155,6 @@ function CleanContextMenu {
     Remove-Item -literalpath "Registry::HKCR\*\shellex\ContextMenuHandlers\{90AA3A4E-1CBA-4233-B8BB-535773D48449}" -ErrorAction SilentlyContinue | Out-Null
     Remove-Item -literalpath "Registry::HKCR\*\shellex\ContextMenuHandlers\{a2a9545d-a0c2-42b4-9708-a0b2badd77c8}" -ErrorAction SilentlyContinue | Out-Null
     Remove-Item -literalpath "Registry::HKCR\*\shellex\ContextMenuHandlers\PDFCreator.ShellContextMenu" -ErrorAction SilentlyContinue | Out-Null
-    Remove-Item -literalpath "Registry::HKCR\*\shellex\ContextMenuHandlers\WinRAR32" -ErrorAction SilentlyContinue | Out-Null
     Remove-Item -literalpath "Registry::HKCR\*\shellex\ContextMenuHandlers\SimpleShlExt" -ErrorAction SilentlyContinue | Out-Null
     Remove-Item -path "Registry::HKCR\Directory\shell\AddToPlaylistVLC" -Recurse -ErrorAction SilentlyContinue | Out-Null
     Remove-Item -path "Registry::HKCR\Directory\shell\PlayWithVLC" -Recurse -ErrorAction SilentlyContinue | Out-Null
@@ -1236,7 +1235,6 @@ function InstallExes {
 function OpenManualWindows {
     control /name Microsoft.IndexingOptions
     Start-Process -FilePath "C:\Program Files\Chromium\Application\chrome.exe"
-    Start-Process -FilePath "C:\Program Files\WinRAR\WinRAR.exe"
     control /name Microsoft.DevicesAndPrinters
 }
 
