@@ -101,6 +101,12 @@ git clone --single-branch --depth 1 https://github.com/robbyrussell/oh-my-zsh.gi
 git clone --single-branch --depth 1 https://github.com/romkatv/powerlevel10k.git /root/.oh-my-zsh/custom/themes/powerlevel10k
 wget -O ~/welcome https://github.com/qdm12/welcome/releases/download/v0.1.1/welcome_0.1.1_linux_amd64
 
+echo "==> Setting Kernel modules"
+modprobe zfs nfs
+mkdir -p /etc/modules-load.d/
+echo "zfs" >> /etc/modules-load.d/zfs.conf
+echo "nfs" >> /etc/modules-load.d/nfs.conf
+
 echo "==> Setting Docker"
 pacman -Sy -q --needed --noconfirm docker
 echo '{"experimental":true,"data-root":"/mnt/configs/docker-data-root","metrics-addr":"127.0.0.1:9323","log-driver":"loki","log-opts":{"loki-url": "http://127.0.0.1:3100/loki/api/v1/push"},"features":{"buildkit":true}}' > /etc/docker/daemon.json
