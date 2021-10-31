@@ -103,7 +103,7 @@ wget -O ~/welcome https://github.com/qdm12/welcome/releases/download/v0.1.1/welc
 
 echo "==> Setting Docker"
 pacman -Sy -q --needed --noconfirm docker
-echo '{"experimental":true,"data-root":"/mnt/configs/docker-data-root","features":{"buildkit":true}}' > /etc/docker/daemon.json
+echo '{"experimental":true,"data-root":"/mnt/configs/docker-data-root","metrics-addr":"127.0.0.1:9323","log-driver":"loki","log-opts":{"loki-url": "http://127.0.0.1:3100/loki/api/v1/push"},"features":{"buildkit":true}}' > /etc/docker/daemon.json
 systemctl enable --now docker
 DOCKER_COMPOSE_VERSION=1.27.4
 wget -qO /usr/local/bin/docker-compose https://github.com/docker/compose/releases/download/$DOCKER_COMPOSE_VERSION/docker-compose-Linux-x86_64
