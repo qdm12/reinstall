@@ -1043,8 +1043,6 @@ function InstallPsCorePackages {
 function InstallExes {
     Write-Output "Installing EXEs..."
     Start-Process files\setup\Delugia.Nerd.Font.Complete.ttf -Wait
-    Start-Process files\setup\johnny.exe -Wait
-    Start-Process files\setup\aisuite3\setup.exe -Wait
     Start-Process files\setup\directxcod4\setup.exe -Wait
     Start-Process files\setup\kombustor.exe -Wait
     Start-Process files\setup\printer.exe -Wait
