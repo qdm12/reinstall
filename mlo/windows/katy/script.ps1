@@ -123,7 +123,6 @@ $tweaks = @(
     "DisableMediaSharing",
     "UninstallMediaPlayer",
     "InstallPowerShellV2",
-    "InstallHyperV",
     "InstallNET23",
     "SetPhotoViewerAssociation",
     "RemovePhotoViewerOpenWith",
@@ -1058,16 +1057,6 @@ Function InstallLinuxSubsystem {
         New-ItemProperty -Force -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\AppModelUnlock" -Name "AllowAllTrustedApps" -PropertyType DWord -Value 1 | Out-Null
     }
     Enable-WindowsOptionalFeature -Online -FeatureName "Microsoft-Windows-Subsystem-Linux" -NoRestart -WarningAction SilentlyContinue | Out-Null
-}
-
-Function InstallHyperV {
-    Write-Output "Installing Hyper-V..."
-    If ((Get-CimInstance -Class "Win32_OperatingSystem").ProductType -eq 1) {
-        Enable-WindowsOptionalFeature -Online -FeatureName "Microsoft-Hyper-V-All" -NoRestart -WarningAction SilentlyContinue | Out-Null
-    }
-    Else {
-        Install-WindowsFeature -Name "Hyper-V" -IncludeManagementTools -WarningAction SilentlyContinue | Out-Null
-    }
 }
 
 Function InstallNET23 {

@@ -107,7 +107,6 @@ $tweaks = @(
     "DisableEdgePreload",
     "DisableEdgeShortcutCreation",
     "UninstallMediaPlayer",
-    # "InstallHyperV",
     # TODO WSL 2
     "InstallNET23",
     "SetPhotoViewerAssociation",
@@ -830,15 +829,6 @@ Function DisableMediaSharing {
 Function UninstallMediaPlayer {
     Write-Output "Uninstalling Windows Media Player..."
     Disable-WindowsOptionalFeature -Online -FeatureName "WindowsMediaPlayer" -NoRestart | Out-Null
-}
-
-Function InstallHyperV {
-    Write-Output "Installing Hyper-V..."
-    If ((Get-CimInstance -Class "Win32_OperatingSystem").ProductType -eq 1) {
-        Enable-WindowsOptionalFeature -Online -FeatureName "Microsoft-Hyper-V-All" -NoRestart | Out-Null
-    } Else {
-        Install-WindowsFeature -Name "Hyper-V" -IncludeManagementTools | Out-Null
-    }
 }
 
 Function InstallNET23 {
