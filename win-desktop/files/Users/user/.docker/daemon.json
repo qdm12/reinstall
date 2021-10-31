@@ -1,8 +1,9 @@
 {
   "registry-mirrors": [],
-  "insecure-registries": [
-    "192.168.2.2:5000"
-  ],
+  "insecure-registries": [],
   "debug": false,
-  "experimental": true
+  "experimental": true,
+  "features": {
+    "buildkit": true
+  }
 }
