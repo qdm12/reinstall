@@ -110,6 +110,7 @@ $tweaks = @(
     "RemoveFaxPrinter",
 
     ### Custom functions ###
+    "SetHostname",
     "MorePrivacyTweaks",
     "CustomizePath",
     "InstallChocolatey",
@@ -994,6 +995,12 @@ function TaskbarPinning {
 function SetFileExtensions {
     Write-Output "Setting file extensions mapping..."
     regedit /S fileexts.reg
+}
+
+function SetHostname {
+    $hostname = "o11"
+    Write-Output "Setting hostname to $hostname..."
+    Rename-Computer -NewName $hostname
 }
 
 function Shutup10 {
