@@ -62,7 +62,6 @@ $tweaks = @(
     "DisableRemoteAssistance",
     "EnableRemoteDesktop",
     "DisableAutorun",
-    "DisableRestorePoints",
     "DisableStorageSense",
     "DisableMapUpdates",
     "DisableDefragmentation",
@@ -523,11 +522,6 @@ Function DisableAutorun {
         New-Item -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer" | Out-Null
     }
     New-ItemProperty -Force -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer" -Name "NoDriveTypeAutoRun" -PropertyType DWord -Value 255 | Out-Null
-}
-
-Function DisableRestorePoints {
-    Write-Output "Disabling System Restore for system drive..."
-    Disable-ComputerRestore -Drive "$env:SYSTEMDRIVE"
 }
 
 Function DisableStorageSense {
