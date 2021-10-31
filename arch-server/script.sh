@@ -115,3 +115,4 @@ DOCKER_COMPOSE_VERSION=1.27.4
 wget -qO /usr/local/bin/docker-compose https://github.com/docker/compose/releases/download/$DOCKER_COMPOSE_VERSION/docker-compose-Linux-x86_64
 chmod 500 /usr/local/bin/docker-compose
 docker network create fries --subnet=10.0.0.0/24
+docker plugin install grafana/loki-docker-driver:latest --alias loki --grant-all-permissions
