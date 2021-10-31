@@ -107,7 +107,6 @@ $tweaks = @(
 
     ### Custom functions ###
     "MorePrivacyTweaks",
-    "AddEncryptionToContext",
     "CustomizePath",
     "InstallChocolatey",
     "InstallChocoPackages",
@@ -807,11 +806,6 @@ Function RemoveFaxPrinter {
 function MorePrivacyTweaks {
     Write-Output "Running more privacy tweaks..."
     New-ItemProperty -Force -path 'HKCU:\Software\Microsoft\Windows\CurrentVersion\AppHost' -name EnableWebContentEvaluation -PropertyType DWord -Value 0 | Out-Null
-}
-
-function AddEncryptionToContext {
-    Write-Output "Adding encryption to explorer context..."
-    New-ItemProperty -Force -Path "HKLM:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name "EncryptionContextMenu" -PropertyType DWord -Value 1 | Out-Null
 }
 
 function CustomizePath {
