@@ -103,7 +103,6 @@ $tweaks = @(
     "DisableEdgeShortcutCreation",
     "UninstallMediaPlayer",
     "SetPhotoViewerAssociation",
-    "UninstallXPSPrinter",
     "RemoveFaxPrinter",
 
     ### Custom functions ###
@@ -795,11 +794,6 @@ Function SetPhotoViewerAssociation {
         New-ItemProperty -Force -Path $("HKCR:\$type\shell\open") -Name "MuiVerb" -PropertyType ExpandString -Value "@%ProgramFiles%\Windows Photo Viewer\photoviewer.dll,-3043" | Out-Null
         New-ItemProperty -Force -Path $("HKCR:\$type\shell\open\command") -Name "(Default)" -PropertyType ExpandString -Value "%SystemRoot%\System32\rundll32.exe `"%ProgramFiles%\Windows Photo Viewer\PhotoViewer.dll`", ImageView_Fullscreen %1" | Out-Null
     }
-}
-
-Function UninstallXPSPrinter {
-    Write-Output "Uninstalling Microsoft XPS Document Writer..."
-    Disable-WindowsOptionalFeature -Online -FeatureName "Printing-XPSServices-Features" -NoRestart | Out-Null
 }
 
 Function RemoveFaxPrinter {

@@ -126,7 +126,6 @@ $tweaks = @(
     "SetPhotoViewerAssociation",
     "RemovePhotoViewerOpenWith",
     "UninstallPDFPrinter",
-    "UninstallXPSPrinter",
     "RemoveFaxPrinter",
     "UninstallFaxAndScan",
 
@@ -1083,11 +1082,6 @@ Function RemovePhotoViewerOpenWith {
 Function UninstallPDFPrinter {
     Write-Output "Uninstalling Microsoft Print to PDF..."
     Disable-WindowsOptionalFeature -Online -FeatureName "Printing-PrintToPDFServices-Features" -NoRestart -WarningAction SilentlyContinue | Out-Null
-}
-
-Function UninstallXPSPrinter {
-    Write-Output "Uninstalling Microsoft XPS Document Writer..."
-    Disable-WindowsOptionalFeature -Online -FeatureName "Printing-XPSServices-Features" -NoRestart -WarningAction SilentlyContinue | Out-Null
 }
 
 Function RemoveFaxPrinter {
