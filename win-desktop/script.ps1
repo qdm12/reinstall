@@ -46,7 +46,6 @@ $tweaks = @(
     "EnableDotNetStrongCrypto",
     "EnableF8BootMenu",
     "DisableRecoveryAndReset",
-    "SetDEPOptIn",
 
     ### Service Tweaks ###
     "DisableMaintenanceWakeUp",
@@ -401,12 +400,6 @@ Function DisableRecoveryAndReset {
     Write-Output "Disabling System Recovery and Factory reset..."
     reagentc /disable 2>&1 | Out-Null
 }
-
-Function SetDEPOptIn {
-    Write-Output "Setting Data Execution Prevention (DEP) policy to OptIn..."
-    bcdedit /set `{current`} nx OptIn | Out-Null
-}
-
 
 # # # # # # # # # # # #
 # Services
