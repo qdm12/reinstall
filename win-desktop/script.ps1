@@ -111,6 +111,7 @@ $tweaks = @(
 
     ### Custom functions ###
     "SetHostname",
+    "DownloadBinaries",
     "MorePrivacyTweaks",
     "CustomizePath",
     "InstallChocolatey",
@@ -1001,6 +1002,10 @@ function SetHostname {
     $hostname = "o11"
     Write-Output "Setting hostname to $hostname..."
     Rename-Computer -NewName $hostname
+}
+
+function DownloadBinaries {
+    Invoke-WebRequest -Uri https://github.com/qdm12/devtainr/releases/download/v0.5.0/devtainr_0.5.0_windows_amd64.exe -OutFile C:\ProgramData\chocolatey\bin\devtainr.exe
 }
 
 function Shutup10 {
