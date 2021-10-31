@@ -20,7 +20,7 @@ function restorephone { adb restore backup.ab }
 function ydl { youtube-dl --extract-audio --audio-format mp3 $args }
 
 # Chrome
-function g { Start-Process -FilePath "C:\Program Files (x86)\Chromium\Application\chrome.exe" -ArgumentList "https://www.google.com/search?q=$args" }
+function g { Start-Process -FilePath "C:\Program Files\Chromium\Application\chrome.exe" -ArgumentList "https://www.google.com/search?q=$args" }
 
 # SSH
 function sshconfig { npp $env:USERPROFILE/.ssh/config }

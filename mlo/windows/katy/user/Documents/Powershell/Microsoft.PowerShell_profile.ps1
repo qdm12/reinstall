@@ -17,7 +17,7 @@ Set-Alias -Name "clear" -Value "cls" -Option AllScope
 function ip { Get-NetAdapter Ethernet | Get-NetIPAddress  -AddressFamily IPv4 | Select-Object IPAddress | Write-Host -NoNewline }
 
 # Chrome
-function g { Start-Process -FilePath "C:\Program Files (x86)\Chromium\Application\chrome.exe" -ArgumentList "https://www.google.com/search?q=$args" }
+function g { Start-Process -FilePath "C:\Program Files\Chromium\Application\chrome.exe" -ArgumentList "https://www.google.com/search?q=$args" }
 
 # Explorer
 function e {

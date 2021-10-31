@@ -1235,7 +1235,7 @@ function InstallExes {
 
 function OpenManualWindows {
     control /name Microsoft.IndexingOptions
-    Start-Process -FilePath "C:\Program Files (x86)\Chromium\Application\chrome.exe"
+    Start-Process -FilePath "C:\Program Files\Chromium\Application\chrome.exe"
     Start-Process -FilePath "C:\Program Files\WinRAR\WinRAR.exe"
     control /name Microsoft.DevicesAndPrinters
 }
