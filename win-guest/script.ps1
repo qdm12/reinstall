@@ -784,16 +784,6 @@ Function UninstallMediaPlayer {
     Disable-WindowsOptionalFeature -Online -FeatureName "WindowsMediaPlayer" -NoRestart | Out-Null
 }
 
-Function InstallNET23 {
-    Write-Output "Installing .NET Framework 2.0, 3.0 and 3.5 runtimes..."
-    If ((Get-CimInstance -Class "Win32_OperatingSystem").ProductType -eq 1) {
-        Enable-WindowsOptionalFeature -Online -FeatureName "NetFx3" -NoRestart | Out-Null
-    }
-    Else {
-        Install-WindowsFeature -Name "NET-Framework-Core" | Out-Null
-    }
-}
-
 Function SetPhotoViewerAssociation {
     Write-Output "Setting Photo Viewer association for bmp, gif, jpg, png and tif..."
     If (!(Test-Path "HKCR:")) {

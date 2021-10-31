@@ -123,7 +123,6 @@ $tweaks = @(
     "DisableMediaSharing",
     "UninstallMediaPlayer",
     "InstallPowerShellV2",
-    "InstallNET23",
     "SetPhotoViewerAssociation",
     "RemovePhotoViewerOpenWith",
     "UninstallPDFPrinter",
@@ -1059,15 +1058,6 @@ Function InstallLinuxSubsystem {
     Enable-WindowsOptionalFeature -Online -FeatureName "Microsoft-Windows-Subsystem-Linux" -NoRestart -WarningAction SilentlyContinue | Out-Null
 }
 
-Function InstallNET23 {
-    Write-Output "Installing .NET Framework 2.0, 3.0 and 3.5 runtimes..."
-    If ((Get-CimInstance -Class "Win32_OperatingSystem").ProductType -eq 1) {
-        Enable-WindowsOptionalFeature -Online -FeatureName "NetFx3" -NoRestart -WarningAction SilentlyContinue | Out-Null
-    }
-    Else {
-        Install-WindowsFeature -Name "NET-Framework-Core" -WarningAction SilentlyContinue | Out-Null
-    }
-}
 
 Function SetPhotoViewerAssociation {
     Write-Output "Setting Photo Viewer association for bmp, gif, jpg, png and tif..."

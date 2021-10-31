@@ -107,7 +107,6 @@ $tweaks = @(
     "DisableEdgePreload",
     "DisableEdgeShortcutCreation",
     "UninstallMediaPlayer",
-    "InstallNET23",
     "SetPhotoViewerAssociation",
     "UninstallXPSPrinter",
     "RemoveFaxPrinter",
@@ -828,16 +827,6 @@ Function DisableMediaSharing {
 Function UninstallMediaPlayer {
     Write-Output "Uninstalling Windows Media Player..."
     Disable-WindowsOptionalFeature -Online -FeatureName "WindowsMediaPlayer" -NoRestart | Out-Null
-}
-
-Function InstallNET23 {
-    Write-Output "Installing .NET Framework 2.0, 3.0 and 3.5 runtimes..."
-    If ((Get-CimInstance -Class "Win32_OperatingSystem").ProductType -eq 1) {
-        Enable-WindowsOptionalFeature -Online -FeatureName "NetFx3" -NoRestart | Out-Null
-    }
-    Else {
-        Install-WindowsFeature -Name "NET-Framework-Core" | Out-Null
-    }
 }
 
 Function SetPhotoViewerAssociation {
