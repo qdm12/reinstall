@@ -124,7 +124,6 @@ $tweaks = @(
     "InstallPowerShellV2",
     "SetPhotoViewerAssociation",
     "RemovePhotoViewerOpenWith",
-    "UninstallPDFPrinter",
     "RemoveFaxPrinter",
     "UninstallFaxAndScan",
 
@@ -1069,11 +1068,6 @@ Function RemovePhotoViewerOpenWith {
         New-PSDrive -Name HKCR -PSProvider Registry -Root HKEY_CLASSES_ROOT | Out-Null
     }
     Remove-Item -Path "HKCR:\Applications\photoviewer.dll\shell\open" -Recurse -ErrorAction SilentlyContinue
-}
-
-Function UninstallPDFPrinter {
-    Write-Output "Uninstalling Microsoft Print to PDF..."
-    Disable-WindowsOptionalFeature -Online -FeatureName "Printing-PrintToPDFServices-Features" -NoRestart -WarningAction SilentlyContinue | Out-Null
 }
 
 Function RemoveFaxPrinter {
