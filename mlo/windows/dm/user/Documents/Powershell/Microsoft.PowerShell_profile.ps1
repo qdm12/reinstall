@@ -1,5 +1,5 @@
 function admin {
-	Start-Process pwsh -Verb runAs
+    Start-Process pwsh -Verb runAs
 }
 function npp {
     if (!$args) {
@@ -8,8 +8,8 @@ function npp {
     }
     Start-Process -FilePath "C:\Program Files\Notepad++\notepad++.exe" -ArgumentList $args
 }
-function h {
-    npp "$env:APPDATA\Microsoft\Windows\PowerShell\PSReadLine\ConsoleHost_history.txt"
+function his {
+    code "$env:APPDATA\Microsoft\Windows\PowerShell\PSReadLine\ConsoleHost_history.txt"
 }
 function a { npp "$PROFILE" }
 Set-Alias -Name "clear" -Value "cls" -Option AllScope
