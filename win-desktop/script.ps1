@@ -107,7 +107,6 @@ $tweaks = @(
     "DisableEdgePreload",
     "DisableEdgeShortcutCreation",
     "UninstallMediaPlayer",
-    # TODO WSL 2
     "InstallNET23",
     "SetPhotoViewerAssociation",
     "UninstallXPSPrinter",
@@ -911,7 +910,7 @@ function InstallChocoPackages {
     msiafterburner evga-precision-x1 `
     valley-benchmark
     # Development
-    choco install docker-desktop docker-compose postman gource adb AndroidStudio graphviz
+    choco install wsl2 docker-desktop docker-compose postman gource adb AndroidStudio graphviz
     # Windows tweaks
     choco install shutup10
     # Other useful programs
