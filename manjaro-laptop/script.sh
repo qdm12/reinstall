@@ -38,6 +38,7 @@ pacman -Sy -q --needed --noconfirm tzdata
 timedatectl set-timezone "$TZ"
 
 echo "==> Setting up ssh"
+pacman -Sy -q --needed --noconfirm mosh
 mkdir -p "/home/$USER/.ssh" "/home/$USER/Desktop" /root/.ssh
 ssh-keygen -b 2048 -t rsa -f /root/.ssh/id_rsa -q -N ""
 cat > /root/.ssh/known_hosts <<EOL
