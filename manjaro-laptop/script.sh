@@ -63,13 +63,21 @@ chmod -R 700 "/home/$USER/"
 
 echo "==> Setting Docker"
 pacman -Sy -q --needed --noconfirm docker
+mkdir -p /etc/docker
 echo '{"experimental": true},"features":{"buildkit":true}' > /etc/docker/daemon.json
 usermod -aG docker "$USER"
 systemctl enable --now docker
-DOCKER_COMPOSE_VERSION=1.27.4
-wget -qO /usr/local/bin/docker-compose https://github.com/docker/compose/releases/download/$DOCKER_COMPOSE_VERSION/docker-compose-Linux-x86_64
-chmod 500 /usr/local/bin/docker-compose
-chown "$USER" /usr/local/bin/docker-compose
+mkdir -p /root/.docker/cli-plugins "/home/$USER/.docker/cli-plugins"
+docker pull "qmcgaw/binpot:compose-v2.0.1" && \
+  containerid="$(docker create qmcgaw/binpot:compose-v2.0.1)" && \
+  docker cp "$containerid:/bin" /root/.docker/cli-plugins/docker-compose && \
+  docker rm "$containerid"
+cp /root/.docker/cli-plugins/docker-compose "/home/$USER/.docker/cli-plugins/docker-compose"
+export COMPOSE_DOCKER_CLI_BUILD=1
+echo "export COMPOSE_DOCKER_CLI_BUILD=1" >> /root/.zshrc
+echo "export COMPOSE_DOCKER_CLI_BUILD=1" >> "/home/$USER/.zshrc"
+echo "alias docker-compose='docker compose'" >> /root/.zshrc
+echo "alias docker-compose='docker compose'" >> "/home/$USER/.zshrc"
 docker pull qmcgaw/basedevcontainer &
 docker pull qmcgaw/godevcontainer &
 docker pull qmcgaw/reactdevcontainer &
