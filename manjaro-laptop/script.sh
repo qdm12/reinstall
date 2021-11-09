@@ -32,7 +32,7 @@ chown -R $USER "/home/$USER/.ssh"
 # TODO launch github.com/settings and show id_rsa.pub
 
 echo "==> Installing some basic packages"
-pacman -Sy -q --needed --noconfirm ca-certificates tree vlc base-devel
+pacman -Sy -q --needed --noconfirm ca-certificates which tree sudo downgrade strace
 
 echo "==> Setting up Git"
 pacman -Sy -q --needed --noconfirm git
@@ -98,6 +98,21 @@ code --install-extension ms-vscode-remote.remote-containers
 code --install-extension ms-azuretools.vscode-docker
 code --install-extension davidanson.vscode-markdownlint
 code --install-extension redhat.vscode-yaml
+
+echo "==> Installing Chrome"
+pacman -Sy -q --needed --noconfirm google-chrome
+
+echo "==> Installing VLC"
+pacman -Sy -q --needed --noconfirm vlc
+
+echo "==> Installing Parsec"
+yay -S --no-confirm parsec-bin
+
+echo "==> Installing Wine"
+pacman -Sy -q --needed --noconfirm wine
+
+echo "==> Installing NTFS driver"
+pacman -Sy -q --needed --noconfirm ntfs-3g
 
 echo "==> Setting up Go and pprof"
 pacman -Sy --noconfirm go graphviz
