@@ -2,8 +2,6 @@
 
 source ./secrets
 
-TZ=Canada/Eastern
-
 if [ "$(whoami)" != "root" ]; then
   echo "This script must be run as root"
   exit 1
@@ -13,29 +11,11 @@ defaultUser=`users | head -n 1 | cut -f 1 -d' '`
 read -p "What's your username [$defaultUser]: " USER
 [ -z $USER ] && USER="$defaultUser"
 
-read -p "Hostname: " HOSTNAME
-if [ -z $HOSTNAME ]; then
-  echo "You must set a non empty hostname"
-  exit 1
-fi
-
 echo "==> Getting the fastest pacman mirror"
 sudo pacman-mirrors --continent
 
 echo "==> Upgrading system and packages (might take some time)"
 pacman -q -Syu --noconfirm
-
-echo "==> Setting hostname"
-echo "$HOSTNAME" > /etc/hostname
-hostnamectl set-hostname "$HOSTNAME"
-
-echo "==> Generating locale"
-echo "en_US.UTF-8 UTF-8" > /etc/locale.gen
-locale-gen
-
-echo "==> Setting timezone"
-pacman -Sy -q --needed --noconfirm tzdata
-timedatectl set-timezone "$TZ"
 
 echo "==> Setting up ssh"
 pacman -Sy -q --needed --noconfirm mosh
@@ -64,26 +44,9 @@ chown $USER "/home/$USER/.gitconfig"
 chmod 400 /root/.gitconfig "/home/$USER/.gitconfig"
 
 echo "==> Installing yay"
-originPath="$(pwd)"
-mkdir /tmp/yay
-cd /tmp/yay
-git clone --single-branch --depth 1 https://aur.archlinux.org/yay.git .
-pacman -Sy -q --needed --noconfirm go
-mkdir -p "/home/$USER/.cache"
-chown -R "$USER" /tmp/yay /.cache
-sudo -u nonroot makepkg
-pacman -R --noconfirm go
-pacman -U --noconfirm yay*.tar.zst
-cd "$originPath"
-rm -r /tmp/yay "/home/$USER/.cache"
-
-echo "==> Installing downgrade"
-su "$USER" -c "yay -Sy --noconfirm downgrade"
+pacman -Sy -q --needed --noconfirm bin-utils base-devel yay
 
 echo "==> Setting up Shell"
-pacman -Sy -q --needed --noconfirm zsh
-export EDITOR=nano
-export LANG=en_US.UTF-8
 usermod --shell /bin/zsh root
 usermod --shell /bin/zsh "$USER"
 wget -qO /root/.zshrc https://raw.githubusercontent.com/qdm12/reinstall/master/manjaro-laptop/.zshrc
