@@ -65,7 +65,7 @@ EOL
 systemctl restart sshd
 
 echo "==> Installing some basic packages"
-pacman -Sy -q --needed --noconfirm ca-certificates which tree git sudo base-devel mosh ca-certificates
+pacman -Sy -q --needed --noconfirm ca-certificates wget which tree git sudo base-devel mosh
 
 echo "==> Setting up non root user for yay"
 useradd -m nonroot
