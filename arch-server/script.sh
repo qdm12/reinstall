@@ -19,9 +19,6 @@ do
   sleep 1
 done
 
-echo "==> Getting the fastest pacman mirror"
-sudo pacman-mirrors --continent
-
 echo "==> Upgrading system and packages (might take some time)"
 pacman -q -Syu --noconfirm
 
