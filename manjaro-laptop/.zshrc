@@ -10,7 +10,7 @@ LANG=en_US.UTF-8
 source $ZSH/oh-my-zsh.sh
 source ~/.p10k.zsh
 alias ls='ls --color=auto -A -F -h'
-alias alpine='docker run -it --rm alpine:3.12'
+alias alpine='docker run -it --rm alpine:3.14'
 alias lzd='docker run -it -v /var/run/docker.sock:/var/run/docker.sock lazyteam/lazydocker'
 alias dps='docker ps --format "{{.Names}} ({{.Status}} using {{.Image}})"'
 alias dstats='printf "RAM \t CPU \t IO \t Container\n"; docker stats --no-stream --format "{{.MemPerc}}\t{{.CPUPerc}}\t{{.BlockIO}}\t{{.Name}}" | sort'
