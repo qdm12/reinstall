@@ -818,8 +818,8 @@ function InstallChocoPackages {
     Write-Output "Installing Choco packages..."
     choco install vcredist2015 --version=14.0.24212.20160825
     choco install shutup10
-    choco install 7zip chromium ccleaner vlc obs-studio vscode
-    choco install ddu msiafterburner steam origin
+    choco install 7zip chromium ccleaner vlc obs-studio
+    choco install ddu msiafterburner steam
     choco install powershell-core vscode
 }
 
