@@ -12,6 +12,7 @@ sudo ~/script.sh
 
 ## TODOs
 
+- Matterbridge
 - Download files from Github when possible
 - Use error trap to fail the script on any error
 - Download welcome binary

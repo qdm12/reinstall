@@ -20,17 +20,8 @@ Right click on script.ps1 and select Run with Powershell
 
 ### Redo before reinstall
 
-- Save games
-- Update files of desktop
-- Update files of desktop
 - Export Taskband:
 
     ```powershell
     reg export HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Taskband taskband.reg
-    ```
-
-- Export File extensions:
-
-    ```powershell
-    reg export HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts fileexts.reg
     ```
