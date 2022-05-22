@@ -44,7 +44,7 @@ chown $USER "/home/$USER/.gitconfig"
 chmod 400 /root/.gitconfig "/home/$USER/.gitconfig"
 
 echo "==> Installing yay"
-pacman -Sy -q --needed --noconfirm bin-utils base-devel yay
+pacman -Sy -q --needed --noconfirm git base-devel yay
 
 echo "==> Setting up Shell"
 usermod --shell /bin/zsh root
