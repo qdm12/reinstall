@@ -53,7 +53,7 @@ echo "YOUR SSH PUBLIC KEY id_rsa.pub IS SAVED ON YOUR DESKTOP"
 # TODO launch github.com/settings and show id_rsa.pub
 
 echo "==> Installing some basic packages"
-pacman -Sy -q --needed --noconfirm ca-certificates tree vlc base-devel
+pacman -Sy -q --needed --noconfirm ca-certificates tree vlc
 
 echo "==> Setting up Git"
 pacman -Sy -q --needed --noconfirm git
@@ -65,18 +65,7 @@ chown $USER "/home/$USER/.gitconfig"
 chmod 400 /root/.gitconfig "/home/$USER/.gitconfig"
 
 echo "==> Installing yay"
-originPath="$(pwd)"
-mkdir /tmp/yay
-cd /tmp/yay
-git clone --single-branch --depth 1 https://aur.archlinux.org/yay.git .
-pacman -Sy -q --needed --noconfirm go
-mkdir -p "/home/$USER/.cache"
-chown -R "$USER" /tmp/yay /.cache
-sudo -u nonroot makepkg
-pacman -R --noconfirm go
-pacman -U --noconfirm yay*.tar.zst
-cd "$originPath"
-rm -r /tmp/yay "/home/$USER/.cache"
+pacman -Sy -q --needed --noconfirm bin-utils base-devel yay
 
 echo "==> Installing downgrade"
 su "$USER" -c "yay -Sy --noconfirm downgrade"

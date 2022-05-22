@@ -62,27 +62,10 @@ EOL
 systemctl restart sshd
 
 echo "==> Installing some basic packages"
-pacman -Sy -q --needed --noconfirm ca-certificates wget which tree git sudo base-devel mosh
-
-echo "==> Setting up non root user for yay"
-useradd -m nonroot
-mkdir -p /etc/sudoers.d
-echo nonroot ALL=\(root\) NOPASSWD:ALL > /etc/sudoers.d/nonroot
-chmod 0440 /etc/sudoers.d/nonroot
+pacman -Sy -q --needed --noconfirm ca-certificates wget which tree git sudo mosh downgrade
 
 echo "==> Installing yay"
-originPath="$(pwd)"
-mkdir /tmp/yay
-cd /tmp/yay
-git clone --single-branch --depth 1 https://aur.archlinux.org/yay.git .
-pacman -Sy -q --needed --noconfirm go
-mkdir -p /home/nonroot/.cache
-chown -R nonroot /tmp/yay /.cache
-sudo -u nonroot makepkg
-pacman -R --noconfirm go
-pacman -U --noconfirm yay*.tar.zst
-cd "$originPath"
-rm -r /tmp/yay /home/nonroot/.cache
+pacman -Sy -q --needed --noconfirm bin-utils base-devel yay
 
 echo "==> Installing downgrade"
 su nonroot -c "yay -Sy --noconfirm downgrade"
