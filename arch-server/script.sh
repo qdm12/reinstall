@@ -62,13 +62,10 @@ EOL
 systemctl restart sshd
 
 echo "==> Installing some basic packages"
-pacman -Sy -q --needed --noconfirm ca-certificates wget which tree git sudo mosh downgrade
+pacman -Sy -q --needed --noconfirm ca-certificates wget which tree git sudo mosh
 
 echo "==> Installing yay"
 pacman -Sy -q --needed --noconfirm bin-utils base-devel yay
-
-echo "==> Installing downgrade"
-su nonroot -c "yay -Sy --noconfirm downgrade"
 
 echo "==> Setting up Shell"
 pacman -Sy -q --needed --noconfirm zsh

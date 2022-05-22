@@ -67,9 +67,6 @@ chmod 400 /root/.gitconfig "/home/$USER/.gitconfig"
 echo "==> Installing yay"
 pacman -Sy -q --needed --noconfirm bin-utils base-devel yay
 
-echo "==> Installing downgrade"
-su "$USER" -c "yay -Sy --noconfirm downgrade"
-
 echo "==> Setting up Shell"
 pacman -Sy -q --needed --noconfirm zsh
 export EDITOR=nano
