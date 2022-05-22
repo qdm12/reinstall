@@ -121,3 +121,8 @@ pacman -Sy --noconfirm go graphviz
 echo "==> Setting up Discord + screen recorder"
 pacman -Sy --noconfirm discord
 yay -S --noconfirm simplescreenrecorder
+
+# Framework laptop specific
+echo deep | tee /sys/power/mem_sleep
+pacman -Sy -q --needed --noconfirm intel_gpu_top libva-utils libva-intel-driver
+pacman -Sy -q --needed --noconfirm fprintd
