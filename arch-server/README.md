@@ -97,17 +97,6 @@
     systemctl enable sshd
     ```
 
-1. Setup ZFS in the Kernel
-
-    ```sh
-    printf "\n[archzfs]\nServer = https://archzfs.com/\$repo/\$arch\n\nIgnorePkg=zfs-dkms\n\n" >> /etc/pacman.conf
-    printf "[options]\nIgnorePkg = zfs-dkms\n\n" >> /etc/pacman.conf
-    pacman-key -r F75D9D76
-    pacman-key --lsign-key F75D9D76
-    pacman -Syyu
-    pacman -Sy -q --noconfirm linux-headers zfs-dkms
-    ```
-
 1. Reboot
 
     ```sh

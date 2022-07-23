@@ -10,15 +10,6 @@ if [ "$(whoami)" != "root" ]; then
   exit 1
 fi
 
-echo "==> Setting ZFS"
-zpool import -a
-# Interactive step
-until zfs load-key -a && zfs mount -a
-do
-  echo "Try again"
-  sleep 1
-done
-
 echo "==> Linking systemd resolver config"
 rm /etc/resolv.conf
 ln -s /run/systemd/resolve/resolv.conf /etc/resolv.conf
@@ -64,6 +55,31 @@ systemctl restart sshd
 echo "==> Installing some basic packages"
 pacman -Sy -q --needed --noconfirm ca-certificates wget which tree git sudo base-devel mosh
 
+echo "==> Installing ZFS"
+wget -qO- https://archzfs.com/archzfs.gpg |  pacman-key -a -
+pacman-key --lsign-key $(wget -qO- https://git.io/JsfVS)
+wget -qO- https://git.io/Jsfw2 > /etc/pacman.d/mirrorlist-archzfs
+tee -a /etc/pacman.conf <<- 'EOF'
+
+[archzfs]
+Include = /etc/pacman.d/mirrorlist-archzfs
+EOF
+pacman -Sy --noconfirm zfs-linux
+modprobe zfs
+mkdir -p /etc/modules-load.d/
+echo "zfs" > /etc/modules-load.d/zfs.conf
+
+echo "==> Setting ZFS"
+zpool import -a
+# Interactive step
+until zfs load-key -a
+do
+  echo "Try again"
+  sleep 1
+done
+mkdir -p /mnt/cache /mnt/code /mnt/configs /mnt/databases /mnt/logs /mnt/medias /mnt/torrents
+zfs mount -a
+
 echo "==> Setting up non root user for yay"
 useradd -m nonroot
 mkdir -p /etc/sudoers.d
@@ -98,12 +114,12 @@ chmod +x ~/welcome
 echo "==> Setting up Wireguard"
 pacman -Sy -q --needed --noconfirm wireguard-tools
 
-echo "==> Setting Kernel modules"
-modprobe zfs nfs nfsd
+echo "==> Setting NFS Kernel modules"
+modprobe nfs
+modprobe nfsd
 mkdir -p /etc/modules-load.d/
-echo "zfs" >> /etc/modules-load.d/zfs.conf
-echo "nfs" >> /etc/modules-load.d/nfs.conf
-echo "nfsd" >> /etc/modules-load.d/nfsd.conf
+echo "nfs" > /etc/modules-load.d/nfs.conf
+echo "nfsd" > /etc/modules-load.d/nfsd.conf
 
 echo "==> Setting Docker"
 pacman -Sy -q --needed --noconfirm docker
