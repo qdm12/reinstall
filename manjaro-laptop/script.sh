@@ -123,9 +123,9 @@ pacman -Sy -q --needed --noconfirm ntfs-3g
 echo "==> Setting up Go and pprof"
 pacman -Sy --noconfirm go graphviz
 
-echo "==> Setting up Discord + screen recorder"
+echo "==> Setting up Slack + Zoom + Discord + screen recorder"
 pacman -Sy --noconfirm discord
-yay -S --noconfirm simplescreenrecorder
+yay -S --noconfirm slack-desktop zoom simplescreenrecorder
 
 # Framework laptop specific
 echo deep | tee /sys/power/mem_sleep
