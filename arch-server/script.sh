@@ -19,9 +19,6 @@ do
   sleep 1
 done
 
-echo "==> Upgrading system and packages (might take some time)"
-pacman -q -Syu --noconfirm
-
 echo "==> Setting hostname"
 echo "$HOSTNAME" > /etc/hostname
 hostnamectl set-hostname "$HOSTNAME"
