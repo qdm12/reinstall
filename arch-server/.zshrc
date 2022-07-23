@@ -18,8 +18,8 @@ alias lzd='docker run -it -v /var/run/docker.sock:/var/run/docker.sock lazyteam/
 alias dps='docker ps --format "{{.Names}} ({{.Status}} using {{.Image}})"'
 alias dstats='printf "RAM \t CPU \t IO \t Container\n"; docker stats --no-stream --format "{{.MemPerc}}\t{{.CPUPerc}}\t{{.BlockIO}}\t{{.Name}}" | sort'
 alias dlog='docker logs -f'
-alias wu='docker-compose -f /mnt/configs/docker/wireguard/up.yml up'
-alias wd='docker-compose -f /mnt/configs/docker/wireguard/down.yml up'
+alias wu='docker-compose -f /mnt/configs/docker/wireguard/docker-compose.yml run wireguard wg-quick up wg0'
+alias wd='docker-compose -f /mnt/configs/docker/wireguard/docker-compose.yml run wireguard wg-quick down wg0'
 alias wr='wd && wu'
 alias ipt='watch -n 1 -d iptables -nvL'
 function findproc(){
@@ -48,8 +48,8 @@ function boot(){
   done
   zfs mount -a
   systemctl start docker
-  docker-compose -f /mnt/configs/docker/wireguard/up.yml up
-  docker-compose -f /mnt/configs/docker/iptables/docker-compose.yml up
+  docker-compose -f /mnt/configs/docker/wireguard/docker-compose.yml run wireguard wg-quick up wg0
+  docker-compose -f /mnt/configs/docker/wireguard/docker-compose.yml run wireguard wg-quick down wg0
   #ntpd -qg
 }
 if [ -f ~/welcome ]; then
