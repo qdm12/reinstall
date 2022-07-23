@@ -11,6 +11,8 @@ source secrets
 cw=/opt/vyatta/sbin/vyatta-cfg-cmd-wrapper
 
 $cw begin
+
+# Commands found using `show configuration commands`
 $cw set firewall all-ping enable
 $cw set firewall broadcast-ping disable
 $cw set firewall ipv6-receive-redirects disable
@@ -59,37 +61,62 @@ $cw set interfaces ethernet eth3 vif 35 pppoe 0 firewall in name WAN_IN
 $cw set interfaces ethernet eth3 vif 35 pppoe 0 firewall local name WAN_LOCAL
 $cw set interfaces ethernet eth3 vif 35 pppoe 0 mtu 1492
 $cw set interfaces ethernet eth3 vif 35 pppoe 0 name-server auto
-$cw set interfaces ethernet eth3 vif 35 pppoe 0 password "$ISP_USER"
-$cw set interfaces ethernet eth3 vif 35 pppoe 0 user-id "$ISP_PASSWORD"
+$cw set interfaces ethernet eth3 vif 35 pppoe 0 password "$ISP_PASSWORD"
+$cw set interfaces ethernet eth3 vif 35 pppoe 0 user-id "$ISP_USER"
 $cw set interfaces loopback lo
 $cw set port-forward auto-firewall enable
 $cw set port-forward hairpin-nat enable
 $cw set port-forward lan-interface eth0
-$cw set port-forward rule 1 description 'Caddy HTTPS'
+$cw set port-forward rule 1 description 'Caddy HTTP'
 $cw set port-forward rule 1 forward-to address 192.168.2.2
-$cw set port-forward rule 1 forward-to port 8443
-$cw set port-forward rule 1 original-port 443
+$cw set port-forward rule 1 forward-to port 8080
+$cw set port-forward rule 1 original-port 80
 $cw set port-forward rule 1 protocol tcp
-$cw set port-forward rule 2 description 'Caddy HTTP'
+$cw set port-forward rule 2 description Wireguard
 $cw set port-forward rule 2 forward-to address 192.168.2.2
-$cw set port-forward rule 2 forward-to port 8080
-$cw set port-forward rule 2 original-port 80
-$cw set port-forward rule 2 protocol tcp
-$cw set port-forward rule 3 description Wireguard
+$cw set port-forward rule 2 forward-to port 51820
+$cw set port-forward rule 2 original-port $WIREGUARD_PORT
+$cw set port-forward rule 2 protocol udp
+$cw set port-forward rule 3 description SSH
 $cw set port-forward rule 3 forward-to address 192.168.2.2
-$cw set port-forward rule 3 forward-to port 51820
-$cw set port-forward rule 3 original-port $WIREGUARD_PORT
-$cw set port-forward rule 3 protocol udp
-$cw set port-forward rule 4 description 'Teamspeak Voice'
+$cw set port-forward rule 3 forward-to port 22
+$cw set port-forward rule 3 original-port $SSH_PORT
+$cw set port-forward rule 3 protocol tcp
+$cw set port-forward rule 4 description 'SSH Mosh'
 $cw set port-forward rule 4 forward-to address 192.168.2.2
-$cw set port-forward rule 4 forward-to port 9987
-$cw set port-forward rule 4 original-port $TEAMSPEAK_VOICE_PORT
+$cw set port-forward rule 4 forward-to port 60001
+$cw set port-forward rule 4 original-port $MOSH_PORT
 $cw set port-forward rule 4 protocol udp
-$cw set port-forward rule 5 description 'Teamspeak Files'
+$cw set port-forward rule 5 description COD4
 $cw set port-forward rule 5 forward-to address 192.168.2.2
-$cw set port-forward rule 5 forward-to port 30033
-$cw set port-forward rule 5 original-port $TEAMSPEAK_FILES_PORT
-$cw set port-forward rule 5 protocol tcp
+$cw set port-forward rule 5 forward-to port 28960
+$cw set port-forward rule 5 original-port 28960
+$cw set port-forward rule 5 protocol udp
+$cw set port-forward rule 6 description Syncthing
+$cw set port-forward rule 6 forward-to address 192.168.2.2
+$cw set port-forward rule 6 forward-to port 22000
+$cw set port-forward rule 6 original-port $SYNCTHING_PORT
+$cw set port-forward rule 6 protocol tcp
+$cw set port-forward rule 7 description 'COD4 slow'
+$cw set port-forward rule 7 forward-to address 192.168.2.2
+$cw set port-forward rule 7 forward-to port 28961
+$cw set port-forward rule 7 original-port 9000
+$cw set port-forward rule 7 protocol udp
+$cw set port-forward rule 8 description 'Gitea ssh'
+$cw set port-forward rule 8 forward-to address 192.168.2.2
+$cw set port-forward rule 8 forward-to port 45678
+$cw set port-forward rule 8 original-port $GITEA_PORT
+$cw set port-forward rule 8 protocol tcp
+$cw set port-forward rule 11 description 'Caddy HTTPS'
+$cw set port-forward rule 11 forward-to address 192.168.2.2
+$cw set port-forward rule 11 forward-to port 8443
+$cw set port-forward rule 11 original-port 443
+$cw set port-forward rule 11 protocol tcp
+$cw set port-forward rule 12 description 'Shadowsocks RO'
+$cw set port-forward rule 12 forward-to address 192.168.2.2
+$cw set port-forward rule 12 forward-to port 8388
+$cw set port-forward rule 12 original-port $SHADOWSOCKS_PORT
+$cw set port-forward rule 12 protocol tcp_udp
 $cw set port-forward wan-interface pppoe0
 $cw set service dhcp-server disabled false
 $cw set service dhcp-server hostfile-update disable
@@ -97,48 +124,46 @@ $cw set service dhcp-server shared-network-name DEBUG authoritative disable
 $cw set service dhcp-server shared-network-name DEBUG subnet 192.168.0.0/24 default-router 192.168.0.1
 $cw set service dhcp-server shared-network-name DEBUG subnet 192.168.0.0/24 dns-server 192.168.0.1
 $cw set service dhcp-server shared-network-name DEBUG subnet 192.168.0.0/24 lease 300
-$cw set service dhcp-server shared-network-name DEBUG subnet 192.168.0.0/24 start 192.168.0.2 stop 192.168.0.10
+$cw set service dhcp-server shared-network-name DEBUG subnet 192.168.0.0/24 start 192.168.0.2 stop 192.168.0.5
 $cw set service dhcp-server shared-network-name ETH0 authoritative disable
 $cw set service dhcp-server shared-network-name ETH0 subnet 192.168.2.0/24 default-router 192.168.2.1
-$cw set service dhcp-server shared-network-name ETH0 subnet 192.168.2.0/24 dns-server 192.168.2.1
-$cw set service dhcp-server shared-network-name ETH0 subnet 192.168.2.0/24 lease 3600
-$cw set service dhcp-server shared-network-name ETH0 subnet 192.168.2.0/24 start 192.168.2.2 stop 192.168.2.240
-$cw set service dhcp-server shared-network-name ETH0 subnet 192.168.2.0/24 static-mapping zenarch ip-address 192.168.2.2
-$cw set service dhcp-server shared-network-name ETH0 subnet 192.168.2.0/24 static-mapping zenarch mac-address '4c:ed:fb:77:c3:74'
-$cw set service dhcp-server shared-network-name ETH0 subnet 192.168.2.0/24 static-mapping ncase ip-address 192.168.2.3
-$cw set service dhcp-server shared-network-name ETH0 subnet 192.168.2.0/24 static-mapping ncase mac-address '4c:ed:fb:77:c2:9d'
+$cw set service dhcp-server shared-network-name ETH0 subnet 192.168.2.0/24 dns-server 192.168.2.2
+$cw set service dhcp-server shared-network-name ETH0 subnet 192.168.2.0/24 lease 86400
+$cw set service dhcp-server shared-network-name ETH0 subnet 192.168.2.0/24 start 192.168.2.2 stop 192.168.2.127
+$cw set service dhcp-server shared-network-name ETH0 subnet 192.168.2.0/24 static-mapping o11 ip-address 192.168.2.3
+$cw set service dhcp-server shared-network-name ETH0 subnet 192.168.2.0/24 static-mapping o11 mac-address '18:c0:4d:09:f6:63'
 $cw set service dhcp-server shared-network-name ETH0 subnet 192.168.2.0/24 static-mapping pi ip-address 192.168.2.4
 $cw set service dhcp-server shared-network-name ETH0 subnet 192.168.2.0/24 static-mapping pi mac-address '4c:ed:fb:70:c3:00'
+$cw set service dhcp-server shared-network-name ETH0 subnet 192.168.2.0/24 static-mapping zenarch ip-address 192.168.2.2
+$cw set service dhcp-server shared-network-name ETH0 subnet 192.168.2.0/24 static-mapping zenarch mac-address 'd8:5e:d3:0f:8b:85'
 $cw set service dhcp-server static-arp disable
 $cw set service dhcp-server use-dnsmasq disable
 $cw set service dns forwarding cache-size 0
 $cw set service dns forwarding listen-on eth0
 $cw set service dns forwarding system
+$cw set service gui http-port 80
+$cw set service gui https-port 443
+$cw set service gui older-ciphers disable
 $cw set service nat rule 5010 description 'masquerade for WAN'
 $cw set service nat rule 5010 outbound-interface pppoe0
 $cw set service nat rule 5010 type masquerade
-
-echo "Setting up SSH server..."
 $cw set service ssh listen-address 192.168.2.1
-$cw set system login banner pre-login '0x0A connection monitored\n\n'
-$cw set system login user "$USER" authentication public-keys desktop key AAAAB3NzaC1yc2EAAAADAQABAAABAQC2JEwHeumCS1IqhE9VIDFTtMSr6vumUdxuEi+ecdnSFFXS36TjeOD0BgI86tLReLQ3ExBJ+uG3NDCIoYrxF/bt42ZNEs627wcFZXUuEV/wgdY1IVrlW/7Wbl3Wl6eECggluzDUxrbrKF5kQPDlkEoAe86XQ/ZEnAB6EORmAQ4aXkIKoe56vndw6H1R+1nmFJfQ8vV8cBOEbHaN0CFOJUnqT3fo/7NRaFBiYJnqRSSBSzBWThc82VJ9QsDr8P+qUoSKaXrvShE/KCoFTNwu+oHqFeTdMUdaUXMRgbHbnAyXps3P7dCsNDV3yyYhvvbEdPBy6Uo6oA76/aLTM4SV3l6R
-$cw set system login user "$USER" authentication public-keys desktop type ssh-rsa
-$cw set system login user "$USER" authentication public-keys laptop key AAAAB3NzaC1yc2EAAAADAQABAAABAQDGci7qw8oqytim6/t+1h4iDpV5JEHuyLZ/Gaj5kNgG7bcon0BSxwGv5x7cydLxXqaU22MGy0rhD3W0aPIacaWJJyJgaP8hTZ2Pp/IDdg0yoP2fke3A7+qbyNKY4VKa/jYOFUFK4/oZcmR76bp7H6Dx0H3FSF+nJCs66Hae11JhJxxbrbMPB5MUxYeEuOUosAmxE+0tRs9ML3vHW/jQEErJ4UOd3J36c2ZKEdtgi/IWE0ccoxD6ugejPNvKwpMAKyqNC73gckZJYohlY1x0OxzoW+Zb2IQlm/RCh+xTVXEnRm7ym/XpvexFskm8XKOWPYMYVeVRY94oQqsNenL+cEi/
-$cw set system login user "$USER" authentication public-keys laptop type ssh-rsa
-$cw set system login user "$USER" authentication public-keys phone key AAAAB3NzaC1yc2EAAAADAQABAAABAQDH7TohL9jzrnMYUqUcLpyS9VjhRP4mNyne7QprIOkkiFmFdAqVdfsjkRdAgzuePUTfJ0mUJi6/wLyg9NPFtGNWhgL2opaFSLxeVr9gZIFPRCq6+GifbZb8Ok2iSankPuqe6y7TFnsIwAgoAglYMrGkLfkXPnfLrdG2D+Hea9+og2LuDKHPgg7l1iJ3/vdaeTKpFx17/uXKjpLI6dQb+pkMMYYxHj84FpfPLf+eRaGrdF3PCaUzHT0LUtsJOXD1LTp5RT3uK1FULxHIQnmhN6v3pWnODeFkoCVm5SJDXfyDCNu1wfmXnTqBXF/XSTkhcxQjjCAhTQXI+J0qj0AMUzml
-$cw set system login user "$USER" authentication public-keys phone type ssh-rsa
-$cw set system login user "$USER" authentication public-keys emergency key AAAAB3NzaC1yc2EAAAADAQABAAABAQC/xzeUPQxLzCfP2EIEVp4yAhhne0xS//PXSgGOwTvKMcafw3qtbeqxptdVreHYimGftYT+1XLYmM/mkXBUx6KGsSzlcOmDRbTSfPZ/IZPAu0kSqWNGd7whIuW/IXU9bQFrvXWM4S9a6kaG+g1RBqnt5pIMJq0JtKhMw44E75paAEtlLq6ssAKss3UApKZ71OJVm9c4yQPZv9nl3NlXpI++aj702+BL3MEEtHurFlFCd838e0QykkwmGkxBZ+ZLnvGft46uirQ3hK5LkG/pFjzKXgPtKUh2ujxicMdLfRfs24PzBhFoQwTzfMDg0NZ+1xZ9ctf1r/YcawodlNljhmmB
-$cw set system login user "$USER" authentication public-keys emergency type ssh-rsa
-$cw set service ssh disable-password-authentication
-sudo service ssh restart
-
+$cw set service ssh port 22
+$cw set service ssh protocol-version v2
 $cw set service ubnt-discover disable
 $cw set service ubnt-discover interface eth3 disable
 $cw set service ubnt-discover-server disable
 $cw set service unms disable
-$cw set system host-name er4
-$cw set system login user "$USER" authentication encrypted-password "$HASHED_PASSWORD"
-$cw set system login user "$USER" level admin
+$cw set system host-name ubnt
+$cw set system login banner pre-login 'you are being watched\n\n'
+$cw set system login user ubnt authentication encrypted-password "$HASHED_PASSWORD"
+$cw set system login user ubnt authentication public-keys backup key AAAAC3NzaC1lZDI1NTE5AAAAIIEHVK63UVe1Mxb07hI1tVr3EXEiwAw7sMNU4NQ3SGP8
+$cw set system login user ubnt authentication public-keys backup type ssh-ed25519
+$cw set system login user ubnt authentication public-keys quentin@framework key AAAAC3NzaC1lZDI1NTE5AAAAIHvoejMJTIEoicmJCJHop4bq5lLpNL3EXmWW6dHPajct
+$cw set system login user ubnt authentication public-keys quentin@framework type ssh-ed25519
+$cw set system login user ubnt authentication public-keys quentin@o11 key AAAAC3NzaC1lZDI1NTE5AAAAII9/8+UQc7dAUIVgldXZH3oFxT0QdF6TWUsHEQPTaYeH
+$cw set system login user ubnt authentication public-keys quentin@o11 type ssh-ed25519
+$cw set system login user ubnt level admin
 $cw set system name-server 192.168.2.2
 $cw set system ntp server 0.ubnt.pool.ntp.org
 $cw set system ntp server 1.ubnt.pool.ntp.org
@@ -152,33 +177,19 @@ $cw set system package repository wheezy distribution wheezy
 $cw set system package repository wheezy password ''
 $cw set system package repository wheezy url 'http://archive.debian.org/debian'
 $cw set system package repository wheezy username ''
-$cw set system static-host-mapping host-name er4.x inet 192.168.2.1
-$cw set system static-host-mapping host-name zenarch.x alias photos.x
-$cw set system static-host-mapping host-name zenarch.x alias test.x
-$cw set system static-host-mapping host-name zenarch.x alias drone.x
-$cw set system static-host-mapping host-name zenarch.x inet 192.168.2.2
-$cw set system static-host-mapping host-name desktop.x inet 192.168.2.3
-$cw set system static-host-mapping host-name desktop.x inet 192.168.2.4
+$cw set system static-host-mapping
 $cw set system syslog global facility all level notice
 $cw set system syslog global facility protocols level debug
 $cw set system time-zone America/Montreal
-$cw set system traffic-analysis custom-category Amazon name Amazon
-$cw set system traffic-analysis custom-category Dev name GitHub
-$cw set system traffic-analysis custom-category Encrypted name 'DNS over TLS'
-$cw set system traffic-analysis custom-category Encrypted name 'Lets Encrypt'
-$cw set system traffic-analysis custom-category Google name QUIC
-$cw set system traffic-analysis custom-category Google name Google
-$cw set system traffic-analysis custom-category Google name 'Google APIs(SSL)'
-$cw set system traffic-analysis custom-category TV name Netflix
-$cw set system traffic-analysis custom-category denisa name 'Yahoo Mail'
-$cw set system traffic-analysis custom-category waste name Instagram
-$cw set system traffic-analysis custom-category waste name Facebook
-$cw set system traffic-analysis custom-category waste name LinkedIn
-$cw set system traffic-analysis dpi enable
-$cw set system traffic-analysis export enable
+$cw set system traffic-analysis dpi disable
+$cw set system traffic-analysis export disable
 $cw set traffic-control
 
+# Extra commands
+$cw set service ssh disable-password-authentication
+
 $cw commit
+$cw save
 $cw end
 
 
