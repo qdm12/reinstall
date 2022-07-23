@@ -56,8 +56,7 @@
     ```sh
     mount /dev/nvme0n1p3 /mnt
     swapon /dev/nvme0n1p2
-    mkdir -p /mnt/boot/EFI
-    mount /dev/nvme0n1p1 /boot/EFI
+    mount --mkdir /dev/nvme0n1p1 /mnt/boot/EFI
     ```
 
 1. Install base Arch
@@ -72,9 +71,9 @@
 
     ```sh
     pacman -S --noconfirm grub efibootmgr dosfstools os-prober mtools
-    grub-install --target=x86_64-efi  --bootloader-id=grub_uefi --recheck
+    grub-install --target=x86_64-efi  --bootloader-id=grub_uefi --recheck --removable
     grub-mkconfig -o /boot/grub/grub.cfg
-    # TODO amd-ucode, amd_iommu=on
+    # TODO VFIO amd_iommu=on
     ```
 
 1. Ensure DHCP and DNS will work:
@@ -82,8 +81,7 @@
     ```sh
     printf "[Match]\nName=en*\n\n[Network]\nLinkLocalAddressing=ipv4\nDHCP=yes\n" > /etc/systemd/network/enp4s0.network
     printf "DNSStubListener=no\n" >> /etc/systemd/resolved.conf
-    rm /etc/resolv.conf
-    ln -s /run/systemd/resolve/resolv.conf /etc/resolv.conf
+    echo "port=0" >> /etc/dnsmasq.conf
     systemctl enable systemd-networkd
     systemctl enable systemd-resolved
     ```
