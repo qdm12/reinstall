@@ -106,8 +106,8 @@ pacman -Sy -q --needed --noconfirm docker
 echo '{"experimental":true,"data-root":"/mnt/configs/docker-data-root","metrics-addr":"127.0.0.1:9323","log-driver":"loki","log-opts":{"loki-url": "http://127.0.0.1:3100/loki/api/v1/push"},"features":{"buildkit":true}}' > /etc/docker/daemon.json
 systemctl enable --now docker
 mkdir -p /root/.docker/cli-plugins
-docker pull "qmcgaw/binpot:compose-v2.0.1" && \
-  containerid="$(docker create qmcgaw/binpot:compose-v2.0.1)" && \
+docker pull "qmcgaw/binpot:compose-v2.7.0" && \
+  containerid="$(docker create qmcgaw/binpot:compose-v2.7.0)" && \
   docker cp "$containerid:/bin" "/root/.docker/cli-plugins/docker-compose" && \
   docker rm "$containerid"
 export COMPOSE_DOCKER_CLI_BUILD=1
