@@ -19,6 +19,10 @@ do
   sleep 1
 done
 
+echo "==> Linking systemd resolver config"
+rm /etc/resolv.conf
+ln -s /run/systemd/resolve/resolv.conf /etc/resolv.conf
+
 echo "==> Setting hostname"
 echo "$HOSTNAME" > /etc/hostname
 hostnamectl set-hostname "$HOSTNAME"
