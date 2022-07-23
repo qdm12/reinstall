@@ -103,6 +103,7 @@ echo "nfsd" >> /etc/modules-load.d/nfsd.conf
 
 echo "==> Setting Docker"
 pacman -Sy -q --needed --noconfirm docker
+mkdir -p /etc/docker
 echo '{"experimental":true,"data-root":"/mnt/configs/docker-data-root","metrics-addr":"127.0.0.1:9323","log-driver":"loki","log-opts":{"loki-url": "http://127.0.0.1:3100/loki/api/v1/push"},"features":{"buildkit":true}}' > /etc/docker/daemon.json
 systemctl enable --now docker
 mkdir -p /root/.docker/cli-plugins
