@@ -41,11 +41,12 @@ function search(){
 }
 function boot(){
   zpool import -a
-  until zfs load-key -a && zfs mount -a
+  until zfs load-key -a
   do
     echo "Try again"
     sleep 1
   done
+  zfs mount -a
   systemctl start docker
   docker-compose -f /mnt/configs/docker/wireguard/up.yml up
   docker-compose -f /mnt/configs/docker/iptables/docker-compose.yml up
