@@ -94,6 +94,9 @@ git clone --single-branch --depth 1 https://github.com/romkatv/powerlevel10k.git
 wget -O ~/welcome https://github.com/qdm12/welcome/releases/download/v0.1.0/welcome_0.1.0_linux_amd64
 chmod +x ~/welcome
 
+echo "==> Setting up Wireguard"
+pacman -Sy -q --needed --noconfirm wireguard-tools
+
 echo "==> Setting Kernel modules"
 modprobe zfs nfs nfsd
 mkdir -p /etc/modules-load.d/
