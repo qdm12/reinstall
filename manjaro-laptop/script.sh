@@ -69,8 +69,8 @@ echo '{"experimental": true},"features":{"buildkit":true}' > /etc/docker/daemon.
 usermod -aG docker "$USER"
 systemctl enable --now docker
 mkdir -p /root/.docker/cli-plugins "/home/$USER/.docker/cli-plugins"
-docker pull "qmcgaw/binpot:compose-v2.0.1" && \
-  containerid="$(docker create qmcgaw/binpot:compose-v2.0.1)" && \
+docker pull "qmcgaw/binpot:compose-v2.7.0" && \
+  containerid="$(docker create qmcgaw/binpot:compose-v2.7.0)" && \
   docker cp "$containerid:/bin" /root/.docker/cli-plugins/docker-compose && \
   docker rm "$containerid"
 cp /root/.docker/cli-plugins/docker-compose "/home/$USER/.docker/cli-plugins/docker-compose"
