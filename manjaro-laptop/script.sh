@@ -32,7 +32,7 @@ chown -R $USER "/home/$USER/.ssh"
 # TODO launch github.com/settings and show id_rsa.pub
 
 echo "==> Installing some basic packages"
-pacman -Sy -q --needed --noconfirm ca-certificates which tree sudo strace
+pacman -Sy -q --needed --noconfirm ca-certificates which tree git sudo strace vlc mosh
 
 echo "==> Setting up Git"
 pacman -Sy -q --needed --noconfirm git
