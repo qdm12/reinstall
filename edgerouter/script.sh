@@ -200,5 +200,5 @@ alias ls='ls -A -F -h'
 alias ipt='watch -n 1 -d iptables -nvL'
 alias pppoelogs='show interfaces pppoe pppoe0 log'
 EOL
-exitOnError $?
+
 echo "done!"
