@@ -118,7 +118,7 @@ $cw set service nat rule 5010 description 'masquerade for WAN'
 $cw set service nat rule 5010 outbound-interface pppoe0
 $cw set service nat rule 5010 type masquerade
 
-printf "Setting up SSH server..."
+echo "Setting up SSH server..."
 $cw set service ssh listen-address 192.168.2.1
 $cw set system login banner pre-login '0x0A connection monitored\n\n'
 $cw set system login user "$USER" authentication public-keys desktop key AAAAB3NzaC1yc2EAAAADAQABAAABAQC2JEwHeumCS1IqhE9VIDFTtMSr6vumUdxuEi+ecdnSFFXS36TjeOD0BgI86tLReLQ3ExBJ+uG3NDCIoYrxF/bt42ZNEs627wcFZXUuEV/wgdY1IVrlW/7Wbl3Wl6eECggluzDUxrbrKF5kQPDlkEoAe86XQ/ZEnAB6EORmAQ4aXkIKoe56vndw6H1R+1nmFJfQ8vV8cBOEbHaN0CFOJUnqT3fo/7NRaFBiYJnqRSSBSzBWThc82VJ9QsDr8P+qUoSKaXrvShE/KCoFTNwu+oHqFeTdMUdaUXMRgbHbnAyXps3P7dCsNDV3yyYhvvbEdPBy6Uo6oA76/aLTM4SV3l6R
@@ -185,10 +185,10 @@ $cw end
 ###############################################
 # Start of script
 ###############################################
-printf "Installing packages..."
+echo "Installing packages..."
 sudo apt-get update -y
 sudo apt-get install -y wget nano
-printf "Setting up Shell..."
+echo "Setting up Shell..."
 export ENV="/home/$USER/.profile"
 cat > "$ENV" <<EOL
 [ -z "$PS1" ] && return
@@ -201,4 +201,4 @@ alias ipt='watch -n 1 -d iptables -nvL'
 alias pppoelogs='show interfaces pppoe pppoe0 log'
 EOL
 exitOnError $?
-printf "done\n"
+echo "done!"
