@@ -113,5 +113,6 @@ docker pull "qmcgaw/binpot:compose-v2.0.1" && \
 export COMPOSE_DOCKER_CLI_BUILD=1
 echo "export COMPOSE_DOCKER_CLI_BUILD=1" >> /root/.zshrc
 echo "alias docker-compose='docker compose'" >> /root/.zshrc
-docker network create fries --subnet=10.0.0.0/24
-docker plugin install grafana/loki-docker-driver:latest --alias loki --grant-all-permissions
+# Stored in docker configuration directory:
+# docker network create fries --subnet=10.0.0.0/24
+# docker plugin install grafana/loki-docker-driver:latest --alias loki --grant-all-permissions
