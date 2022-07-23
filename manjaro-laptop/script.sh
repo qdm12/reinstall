@@ -39,6 +39,11 @@ pacman -Sy -q --needed --noconfirm git
 git config --global user.email "quentin.mcgaw@gmail.com"
 git config --global user.name "Quentin McGaw"
 git config --global url.ssh://git@github.com/.insteadOf https://github.com/
+git config --global core.fileMode false
+git config --global core.eof lf
+git config --global core.autocrlf input
+git config --global core.editor "code --wait"
+git config --global pager.branch false
 cp /root/.gitconfig "/home/$USER/.gitconfig"
 chown $USER "/home/$USER/.gitconfig"
 chmod 400 /root/.gitconfig "/home/$USER/.gitconfig"
