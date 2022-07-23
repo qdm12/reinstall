@@ -73,6 +73,7 @@ mkdir -p /home/nonroot/.cache
 chown nonroot /home/nonroot/.cache
 
 echo "==> Installing yay"
+# Note: only Manjaro can install yay with pacman
 originPath="$(pwd)"
 mkdir /tmp/yay
 cd /tmp/yay
