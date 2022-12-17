@@ -58,7 +58,7 @@ wget -qO /root/.zshrc https://raw.githubusercontent.com/qdm12/reinstall/master/m
 wget -qO /root/.p10k.zsh https://raw.githubusercontent.com/qdm12/reinstall/master/manjaro-laptop/.p10k.zsh
 git clone --single-branch --depth 1 https://github.com/robbyrussell/oh-my-zsh.git /root/.oh-my-zsh
 git clone --single-branch --depth 1 https://github.com/romkatv/powerlevel10k.git /root/.oh-my-zsh/custom/themes/powerlevel10k
-wget -O ~/welcome https://github.com/qdm12/welcome/releases/download/v0.1.0/welcome_0.1.0_linux_amd64
+wget -O ~/welcome https://github.com/qdm12/welcome/releases/download/v0.2.0/welcome_0.2.0_linux_amd64
 chmod +x ~/welcome
 cp -f /root/.zshrc "/home/$USER/"
 cp -f /root/.p10k.zsh "/home/$USER/"
