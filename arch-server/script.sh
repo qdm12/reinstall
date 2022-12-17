@@ -79,6 +79,8 @@ do
 done
 mkdir -p /mnt/cache /mnt/code /mnt/configs /mnt/databases /mnt/logs /mnt/medias /mnt/torrents
 zfs mount -a
+systemctl enable zfs-scrub-monthly@ssdpool.timer --now
+systemctl enable zfs-scrub-monthly@hddpool.timer --now
 
 echo "==> Setting up non root user for yay"
 useradd -m nonroot
