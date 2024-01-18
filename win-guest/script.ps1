@@ -823,7 +823,7 @@ function InstallChocoPackages {
     # Terminal
     choco install git microsoft-windows-terminal powershell-core colortool
     # Browser
-    choco install chromium
+    choco install googlechrome
     # File editing
     choco install vscode
     # Hardware
@@ -912,7 +912,7 @@ function InstallExes {
 
 function OpenManualWindows {
     control /name Microsoft.IndexingOptions
-    Start-Process -FilePath "C:\Program Files\Chromium\Application\chrome.exe"
+    Start-Process -FilePath "$env:ProgramFiles\Goolge\Chrome\Application\chrome.exe"
 }
 
 $tweaks | ForEach-Object { Invoke-Expression $_ }

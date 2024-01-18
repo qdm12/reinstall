@@ -19,8 +19,8 @@ function backupphone { adb backup -system -apk -shared -all -f backup.ab }
 function restorephone { adb restore backup.ab }
 function ydl { youtube-dl --extract-audio --audio-format mp3 $args }
 
-# Chrome
-function g { Start-Process -FilePath "C:\Program Files\Chromium\Application\chrome.exe" -ArgumentList "https://www.google.com/search?q=$args" }
+# Firefox
+function g { Start-Process -FilePath "$env:ProgramFiles\Mozilla Firefox\firefox.exe" -ArgumentList "https://www.google.com/search?q=$args" }
 
 # SSH
 function sshconfig { npp $env:USERPROFILE/.ssh/config }

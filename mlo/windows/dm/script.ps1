@@ -1102,7 +1102,7 @@ function InstallChocoPackages {
     # windows
     choco install vcredist140 vcredist2008 vcredist2010 vcredist2012 vcredist2013 vcredist2015
     # vital
-    choco install notepadplusplus microsoft-windows-terminal powershell-core 7zip chromium firefox ccleaner vlc
+    choco install notepadplusplus microsoft-windows-terminal powershell-core 7zip firefox ccleaner vlc
     # tweaking
     choco install shutup10
     # networking
@@ -1205,7 +1205,7 @@ function InstallExes {
 
 function OpenManualWindows {
     control /name Microsoft.IndexingOptions
-    Start-Process -FilePath "C:\Program Files\Chromium\Application\chrome.exe"
+    Start-Process -FilePath "$env:ProgramFiles\Mozilla Firefox\firefox.exee"
     control /name Microsoft.DevicesAndPrinters
 }
 

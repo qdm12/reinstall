@@ -875,7 +875,7 @@ function InstallChocoPackages {
     # Terminal
     choco install git microsoft-windows-terminal powershell-core colortool MobaXTerm
     # Browser
-    choco install chromium
+    choco install firefox
     # File editing
     choco install vscode
     # Hardware
@@ -1101,7 +1101,7 @@ function InstallVSCodeExtensions {
 
 function OpenManualWindows {
     control /name Microsoft.IndexingOptions
-    Start-Process -FilePath "C:\Program Files\Chromium\Application\chrome.exe"
+    Start-Process -FilePath "$env:ProgramFiles\Mozilla Firefox\firefox.exe"
     control /name Microsoft.DevicesAndPrinters
 }
 

@@ -16,8 +16,8 @@ Set-Alias -Name "clear" -Value "cls" -Option AllScope
 # Set-Alias -Name "ls" -Value "ls --show-control-chars -F --color" -Option AllScope
 function ip { Get-NetAdapter Ethernet | Get-NetIPAddress  -AddressFamily IPv4 | Select-Object IPAddress | Write-Host -NoNewline }
 
-# Chrome
-function g { Start-Process -FilePath "C:\Program Files\Chromium\Application\chrome.exe" -ArgumentList "https://www.google.com/search?q=$args" }
+# Google
+function g { Start-Process -FilePath "$env:ProgramFiles\Mozilla Firefox\firefox.exe" -ArgumentList "https://www.google.com/search?q=$args" }
 
 # Explorer
 function e {

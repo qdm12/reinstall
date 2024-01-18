@@ -818,7 +818,7 @@ function InstallChocoPackages {
     Write-Output "Installing Choco packages..."
     choco install vcredist2015 --version=14.0.24212.20160825
     choco install shutup10
-    choco install 7zip chromium ccleaner vlc obs-studio
+    choco install 7zip firefox ccleaner vlc obs-studio
     choco install ddu msiafterburner steam
     choco install powershell-core vscode
 }
@@ -902,7 +902,7 @@ function InstallExes {
 
 function OpenManualWindows {
     control /name Microsoft.IndexingOptions
-    Start-Process -FilePath "C:\Program Files\Chromium\Application\chrome.exe"
+    Start-Process -FilePath "$env:ProgramFiles\Mozilla Firefox\firefox.exe"
 }
 
 $tweaks | ForEach-Object { Invoke-Expression $_ }

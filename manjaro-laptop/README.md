@@ -17,7 +17,7 @@ sudo ~/script.sh
 - Use error trap to fail the script on any error
 - Download welcome binary
 - Use Dialog for interactive menus
-- Auto login to Chromium and set it as default browser
+- Auto login to Firefox and set it as default browser
 - Login to Docker hub
 - Generate wg0.conf with servers public keys and write client public key generated to desktop
 - Git clone some projects

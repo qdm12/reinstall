@@ -16,7 +16,7 @@ Right click on script.ps1 and select Run with Powershell
 
 ## More steps
 
-- Login to Chromium and set Chromium as default browser
+- Login to Firefox and set Firefox as default browser
 - Indexing locations (open indexing window)
     - `C:\%USERPFORFILE%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs`
     - `C:\ProgramData\chocolatey\bin`
