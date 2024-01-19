@@ -869,7 +869,7 @@ function InstallChocoPackages {
         vcredist140 vcredist2008 vcredist2010 vcredist2012 `
         vcredist2013 vcredist2015 vcredist2017 directx
     # Network CLIs
-    choco install wget curl iperf3 netcat
+    choco install curl
     # Compression
     choco install 7zip
     # Terminal
