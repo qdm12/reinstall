@@ -882,7 +882,7 @@ function InstallChocoPackages {
     choco install disable-nvidia-telemetry ddu defraggler `
         msiafterburner valley-benchmark cinebench
     # Development
-    choco install wsl2 docker-desktop docker-compose postman gource adb AndroidStudio graphviz
+    choco install wsl2 docker-desktop docker-compose postman gource adb graphviz
     # Windows tweaks
     choco install shutup10
     # Other useful programs
