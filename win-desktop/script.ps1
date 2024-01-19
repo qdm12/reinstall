@@ -900,7 +900,7 @@ function InstallChocoPackages {
     # Communication
     choco install discord signal WhatsApp
     # Download
-    choco install youtube-dl qbittorrent
+    choco install yt-dlp qbittorrent
     # ISO manipulation
     choco install reflect-free rufus imgburn
     # Office documents
