@@ -785,22 +785,45 @@ function InstallChocolatey {
     choco feature enable -n=allowGlobalConfirmation
 }
 
+function installChocoPackage {
+    Param
+    (
+        [Parameter(Mandatory = $true, Position = 0)]
+        [ValidatePattern('[a-zA-Z0-9-_.]+')]
+        [string] $PackageName,
+        [Parameter(Mandatory = $false)]
+        [ValidatePattern('[a-zA-Z0-9-_.]+')]
+        [string] $CheckExec,
+        [Parameter(Mandatory = $false)]
+        [ValidateScript({ Test-Path -IsValid $_ })]
+        [string] $CheckPath
+    )
+
+    if (
+        (( $CheckExec -ne $null ) -and (Get-Command $CheckExec -ErrorAction SilentlyContinue)) -or
+        (( $CheckPath -ne $null ) -and (Test-Path $CheckPath))
+    ) {
+        Write-Output "$PackageName is already installed ✅"
+        return
+    }
+
+    choco install $PackageName
+}
+
 function InstallChocoPackages {
     Write-Output "Installing Choco packages..."
     # VS Redist for programs and games
     choco install vcredist2015 --version=14.0.24212.20160825 `
         vcredist140 vcredist2008 vcredist2010 vcredist2012 `
         vcredist2013 vcredist2015 vcredist2017 directx
-    # Network CLIs
-    choco install curl
-    # Compression
-    choco install 7zip
-    # Terminal
-    choco install git microsoft-windows-terminal nushell powershell-core
-    # Browser
-    choco install firefox
-    # File editing
-    choco install vscode
+    installChocoPackage curl -CheckExec curl
+    installChocoPackage 7zip -CheckExec 7z
+    installChocoPackage git -CheckExec git
+    installChocoPackage microsoft-windows-terminal -CheckExec wt
+    installChocoPackage nushell -CheckExec nu
+    installChocoPackage powershell-core -CheckExec pwsh
+    installChocoPackage firefox -CheckPath "$env:ProgramFiles\Mozilla Firefox\firefox.exe"
+    installChocoPackage vscode -CheckExec code
     # Hardware
     choco install disable-nvidia-telemetry ddu defraggler `
         msiafterburner valley-benchmark cinebench `
@@ -987,7 +1010,6 @@ function InstallExes {
     Start-Process files\setup\Delugia.Nerd.Font.Complete.ttf -Wait
     Start-Process files\setup\directxcod4\setup.exe -Wait
     Start-Process files\setup\kombustor.exe -Wait
-    Start-Process files\setup\printer.exe -Wait
 }
 
 function InstallVSCodeExtensions {
