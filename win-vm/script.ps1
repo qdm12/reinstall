@@ -809,6 +809,10 @@ function CustomizePath {
 }
 
 function InstallChocolatey {
+    if (Get-Command "choco" -ErrorAction SilentlyContinue) {
+        Write-Output "Chocolatey is already installed ✅"
+        return
+    }
     Write-Output "Installing Chocolatey..."
     Set-ExecutionPolicy Bypass -Scope Process -Force; Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
     choco feature enable -n=allowGlobalConfirmation
