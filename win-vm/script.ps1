@@ -106,7 +106,6 @@ $tweaks = @(
 
     ### Custom functions ###
     "MorePrivacyTweaks",
-    "CustomizePath",
     "InstallChocolatey",
     "InstallChocoPackages",
     "CleanContextMenu",
@@ -801,12 +800,6 @@ function MorePrivacyTweaks {
     New-ItemProperty -Force -path 'HKCU:\Software\Microsoft\Windows\CurrentVersion\AppHost' -name EnableWebContentEvaluation -PropertyType DWord -Value 0 | Out-Null
 }
 
-function CustomizePath {
-    Write-Output "Customizing path..."
-    $oldpath = (Get-ItemProperty -Path 'Registry::HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Session Manager\Environment' -Name PATH).path
-    $newpath = "$oldpath"
-    Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Session Manager\Environment' -Name PATH -Value $newPath
-}
 
 function InstallChocolatey {
     if (Get-Command "choco" -ErrorAction SilentlyContinue) {
