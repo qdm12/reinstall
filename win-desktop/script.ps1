@@ -883,7 +883,9 @@ function InstallChocoPackages {
         msiafterburner valley-benchmark cinebench `
         crystaldiskinfo hwinfo occt samsung-magician
     # Development
-    choco install wsl2 docker-desktop docker-compose postman gource adb graphviz
+    choco install wsl2 docker-desktop docker-compose postman `
+        gource adb graphviz gpg4win-vanilla golang rust mingw `
+        tesseract Ghostscript
     # Windows tweaks
     choco install shutup10
     # Other useful programs
