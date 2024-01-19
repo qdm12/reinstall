@@ -993,35 +993,17 @@ function InstallExes {
 
 function InstallVSCodeExtensions {
     Write-Output "Installing VSCode extensions..."
-    Start-Process -FilePath "$env:PROGRAMFILES\Microsoft VS Code\bin\code.cmd" -ArgumentList "--install-extension axetroy.vscode-imagemin" -NoNewWindow -Wait
-    Start-Process -FilePath "$env:PROGRAMFILES\Microsoft VS Code\bin\code.cmd" -ArgumentList "--install-extension bierner.emojisense" -NoNewWindow -Wait
-    Start-Process -FilePath "$env:PROGRAMFILES\Microsoft VS Code\bin\code.cmd" -ArgumentList "--install-extension bierner.markdown-preview-github-styles" -NoNewWindow -Wait
-    Start-Process -FilePath "$env:PROGRAMFILES\Microsoft VS Code\bin\code.cmd" -ArgumentList "--install-extension cssho.vscode-svgviewer" -NoNewWindow -Wait
-    Start-Process -FilePath "$env:PROGRAMFILES\Microsoft VS Code\bin\code.cmd" -ArgumentList "--install-extension Dart-Code.dart-code" -NoNewWindow -Wait
-    Start-Process -FilePath "$env:PROGRAMFILES\Microsoft VS Code\bin\code.cmd" -ArgumentList "--install-extension Dart-Code.flutter" -NoNewWindow -Wait
-    Start-Process -FilePath "$env:PROGRAMFILES\Microsoft VS Code\bin\code.cmd" -ArgumentList "--install-extension DavidAnson.vscode-markdownlint" -NoNewWindow -Wait
-    Start-Process -FilePath "$env:PROGRAMFILES\Microsoft VS Code\bin\code.cmd" -ArgumentList "--install-extension eamodio.gitlens" -NoNewWindow -Wait
-    Start-Process -FilePath "$env:PROGRAMFILES\Microsoft VS Code\bin\code.cmd" -ArgumentList "--install-extension earshinov.permute-lines" -NoNewWindow -Wait
-    Start-Process -FilePath "$env:PROGRAMFILES\Microsoft VS Code\bin\code.cmd" -ArgumentList "--install-extension GitHub.vscode-pull-request-github" -NoNewWindow -Wait
-    Start-Process -FilePath "$env:PROGRAMFILES\Microsoft VS Code\bin\code.cmd" -ArgumentList "--install-extension GrapeCity.gc-excelviewer" -NoNewWindow -Wait
-    Start-Process -FilePath "$env:PROGRAMFILES\Microsoft VS Code\bin\code.cmd" -ArgumentList "--install-extension Gruntfuggly.todo-tree" -NoNewWindow -Wait
-    Start-Process -FilePath "$env:PROGRAMFILES\Microsoft VS Code\bin\code.cmd" -ArgumentList "--install-extension HookyQR.beautify" -NoNewWindow -Wait
-    Start-Process -FilePath "$env:PROGRAMFILES\Microsoft VS Code\bin\code.cmd" -ArgumentList "--install-extension IBM.output-colorizer" -NoNewWindow -Wait
-    Start-Process -FilePath "$env:PROGRAMFILES\Microsoft VS Code\bin\code.cmd" -ArgumentList "--install-extension mikestead.dotenv" -NoNewWindow -Wait
-    Start-Process -FilePath "$env:PROGRAMFILES\Microsoft VS Code\bin\code.cmd" -ArgumentList "--install-extension mohsen1.prettify-json" -NoNewWindow -Wait
-    Start-Process -FilePath "$env:PROGRAMFILES\Microsoft VS Code\bin\code.cmd" -ArgumentList "--install-extension ms-azuretools.vscode-docker" -NoNewWindow -Wait
-    Start-Process -FilePath "$env:PROGRAMFILES\Microsoft VS Code\bin\code.cmd" -ArgumentList "--install-extension ms-vscode-remote.remote-containers" -NoNewWindow -Wait
-    Start-Process -FilePath "$env:PROGRAMFILES\Microsoft VS Code\bin\code.cmd" -ArgumentList "--install-extension ms-vscode-remote.remote-ssh" -NoNewWindow -Wait
-    Start-Process -FilePath "$env:PROGRAMFILES\Microsoft VS Code\bin\code.cmd" -ArgumentList "--install-extension ms-vscode-remote.vscode-remote-extensionpack" -NoNewWindow -Wait
-    Start-Process -FilePath "$env:PROGRAMFILES\Microsoft VS Code\bin\code.cmd" -ArgumentList "--install-extension ms-vscode.powershell" -NoNewWindow -Wait
-    Start-Process -FilePath "$env:PROGRAMFILES\Microsoft VS Code\bin\code.cmd" -ArgumentList "--install-extension ms-vsliveshare.vsliveshare" -NoNewWindow -Wait
-    Start-Process -FilePath "$env:PROGRAMFILES\Microsoft VS Code\bin\code.cmd" -ArgumentList "--install-extension pnp.polacode" -NoNewWindow -Wait
-    Start-Process -FilePath "$env:PROGRAMFILES\Microsoft VS Code\bin\code.cmd" -ArgumentList "--install-extension redhat.vscode-commons" -NoNewWindow -Wait
-    Start-Process -FilePath "$env:PROGRAMFILES\Microsoft VS Code\bin\code.cmd" -ArgumentList "--install-extension redhat.vscode-yaml" -NoNewWindow -Wait
-    Start-Process -FilePath "$env:PROGRAMFILES\Microsoft VS Code\bin\code.cmd" -ArgumentList "--install-extension shardulm94.trailing-spaces" -NoNewWindow -Wait
-    Start-Process -FilePath "$env:PROGRAMFILES\Microsoft VS Code\bin\code.cmd" -ArgumentList "--install-extension Tyriar.sort-lines" -NoNewWindow -Wait
-    Start-Process -FilePath "$env:PROGRAMFILES\Microsoft VS Code\bin\code.cmd" -ArgumentList "--install-extension vscode-icons-team.vscode-icons" -NoNewWindow -Wait
-    Start-Process -FilePath "$env:PROGRAMFILES\Microsoft VS Code\bin\code.cmd" -ArgumentList "--install-extension yzane.markdown-pdf" -NoNewWindow -Wait
+    $extensionIDs = @("axetroy.vscode-imagemin", "bierner.emojisense", "bierner.markdown-preview-github-styles",
+        "cssho.vscode-svgviewer", "Dart-Code.dart-code", "Dart-Code.flutter", "DavidAnson.vscode-markdownlint",
+        "eamodio.gitlens", "earshinov.permute-lines", "GitHub.vscode-pull-request-github", "GrapeCity.gc-excelviewer",
+        "Gruntfuggly.todo-tree", "HookyQR.beautify", "IBM.output-colorizer", "mikestead.dotenv", "mohsen1.prettify-json",
+        "ms-azuretools.vscode-docker", "ms-vscode-remote.remote-containers", "ms-vscode-remote.remote-ssh",
+        "ms-vscode-remote.vscode-remote-extensionpack", "ms-vscode.powershell", "ms-vsliveshare.vsliveshare", "pnp.polacode",
+        "redhat.vscode-commons", "redhat.vscode-yaml", "shardulm94.trailing-spaces", "Tyriar.sort-lines",
+        "vscode-icons-team.vscode-icons", "yzane.markdown-pdf")
+    foreach ($extensionID in $extensionIDs) {
+        Start-Process -FilePath "$env:PROGRAMFILES\Microsoft VS Code\bin\code.cmd" -ArgumentList "--install-extension $extensionID" -NoNewWindow -Wait
+    }
 }
 
 function OpenManualWindows {
