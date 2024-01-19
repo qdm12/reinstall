@@ -29,7 +29,6 @@ Right click on script.ps1 and select Run with Powershell
     - Keyboard
     - Mouse
 - Setup Wifi devices
-    - Canon selphy
     - Xbox Controller
 
 ## TODOs

@@ -988,7 +988,6 @@ function InstallExes {
     Start-Process files\setup\directxcod4\setup.exe -Wait
     Start-Process files\setup\kombustor.exe -Wait
     Start-Process files\setup\printer.exe -Wait
-    Start-Process files\setup\selphy.exe -Wait
 }
 
 function InstallVSCodeExtensions {
