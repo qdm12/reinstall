@@ -898,7 +898,7 @@ function InstallChocoPackages {
     # Screenshots
     choco install greenshot screentogif
     # Communication
-    choco install discord signal
+    choco install discord signal WhatsApp
     # Download
     choco install youtube-dl qbittorrent
     # ISO manipulation
