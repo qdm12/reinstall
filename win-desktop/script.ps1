@@ -880,7 +880,8 @@ function InstallChocoPackages {
     choco install vscode
     # Hardware
     choco install disable-nvidia-telemetry ddu defraggler `
-        msiafterburner valley-benchmark cinebench
+        msiafterburner valley-benchmark cinebench `
+        crystaldiskinfo hwinfo occt samsung-magician
     # Development
     choco install wsl2 docker-desktop docker-compose postman gource adb graphviz
     # Windows tweaks
