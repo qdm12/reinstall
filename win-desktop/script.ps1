@@ -142,34 +142,20 @@ Function DisableTelemetry {
     New-ItemProperty -Force -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\DataCollection" -Name "AllowTelemetry" -PropertyType DWord -Value 0 | Out-Null
     New-ItemProperty -Force -Path "HKLM:\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Policies\DataCollection" -Name "AllowTelemetry" -PropertyType DWord -Value 0 | Out-Null
     New-ItemProperty -Force -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\DataCollection" -Name "AllowTelemetry" -PropertyType DWord -Value 0 | Out-Null
-    If (!(Test-Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\PreviewBuilds")) {
-        New-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\PreviewBuilds" -Force | Out-Null
-    }
+    createRegistryEntry("HKLM:\SOFTWARE\Policies\Microsoft\Windows\PreviewBuilds")
     New-ItemProperty -Force -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\PreviewBuilds" -Name "AllowBuildPreview" -PropertyType DWord -Value 0 | Out-Null
-    If (!(Test-Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows NT\CurrentVersion\Software Protection Platform")) {
-        New-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows NT\CurrentVersion\Software Protection Platform" -Force | Out-Null
-    }
+    createRegistryEntry("HKLM:\SOFTWARE\Policies\Microsoft\Windows NT\CurrentVersion\Software Protection Platform")
     New-ItemProperty -Force -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows NT\CurrentVersion\Software Protection Platform" -Name "NoGenTicket" -PropertyType DWord -Value 1 | Out-Null
-    If (!(Test-Path "HKLM:\SOFTWARE\Policies\Microsoft\SQMClient\Windows")) {
-        New-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\SQMClient\Windows" -Force | Out-Null
-    }
+    createRegistryEntry("HKLM:\SOFTWARE\Policies\Microsoft\SQMClient\Windows")
     New-ItemProperty -Force -Path "HKLM:\SOFTWARE\Policies\Microsoft\SQMClient\Windows" -Name "CEIPEnable" -PropertyType DWord -Value 0 | Out-Null
-    If (!(Test-Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\AppCompat")) {
-        New-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\AppCompat" -Force | Out-Null
-    }
+    createRegistryEntry("HKLM:\SOFTWARE\Policies\Microsoft\Windows\AppCompat")
     New-ItemProperty -Force -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\AppCompat" -Name "AITEnable" -PropertyType DWord -Value 0 | Out-Null
     New-ItemProperty -Force -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\AppCompat" -Name "DisableInventory" -PropertyType DWord -Value 1 | Out-Null
-    If (!(Test-Path "HKLM:\SOFTWARE\Policies\Microsoft\AppV\CEIP")) {
-        New-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\AppV\CEIP" -Force | Out-Null
-    }
+    createRegistryEntry("HKLM:\SOFTWARE\Policies\Microsoft\AppV\CEIP")
     New-ItemProperty -Force -Path "HKLM:\SOFTWARE\Policies\Microsoft\AppV\CEIP" -Name "CEIPEnable" -PropertyType DWord -Value 0 | Out-Null
-    If (!(Test-Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\TabletPC")) {
-        New-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\TabletPC" -Force | Out-Null
-    }
+    createRegistryEntry("HKLM:\SOFTWARE\Policies\Microsoft\Windows\TabletPC")
     New-ItemProperty -Force -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\TabletPC" -Name "PreventHandwritingDataSharing" -PropertyType DWord -Value 1 | Out-Null
-    If (!(Test-Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\TextInput")) {
-        New-Item -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\TextInput" -Force | Out-Null
-    }
+    createRegistryEntry("HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\TextInput")
     New-ItemProperty -Force -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\TextInput" -Name "AllowLinguisticDataCollection" -PropertyType DWord -Value 0 | Out-Null
     Disable-ScheduledTask -TaskName "Microsoft\Windows\Application Experience\Microsoft Compatibility Appraiser" | Out-Null
     Disable-ScheduledTask -TaskName "Microsoft\Windows\Application Experience\ProgramDataUpdater" | Out-Null
@@ -181,17 +167,11 @@ Function DisableTelemetry {
 
 Function DisableWiFiSense {
     Write-Output "Disabling Wi-Fi Sense..."
-    If (!(Test-Path "HKLM:\SOFTWARE\Microsoft\PolicyManager\default\WiFi\AllowWiFiHotSpotReporting")) {
-        New-Item -Path "HKLM:\SOFTWARE\Microsoft\PolicyManager\default\WiFi\AllowWiFiHotSpotReporting" -Force | Out-Null
-    }
+    createRegistryEntry("HKLM:\SOFTWARE\Microsoft\PolicyManager\default\WiFi\AllowWiFiHotSpotReporting")
     New-ItemProperty -Force -Path "HKLM:\SOFTWARE\Microsoft\PolicyManager\default\WiFi\AllowWiFiHotSpotReporting" -Name "Value" -PropertyType DWord -Value 0 | Out-Null
-    If (!(Test-Path "HKLM:\SOFTWARE\Microsoft\PolicyManager\default\WiFi\AllowAutoConnectToWiFiSenseHotspots")) {
-        New-Item -Path "HKLM:\SOFTWARE\Microsoft\PolicyManager\default\WiFi\AllowAutoConnectToWiFiSenseHotspots" -Force | Out-Null
-    }
+    createRegistryEntry("HKLM:\SOFTWARE\Microsoft\PolicyManager\default\WiFi\AllowAutoConnectToWiFiSenseHotspots")
     New-ItemProperty -Force -Path "HKLM:\SOFTWARE\Microsoft\PolicyManager\default\WiFi\AllowAutoConnectToWiFiSenseHotspots" -Name "Value" -PropertyType DWord -Value 0 | Out-Null
-    If (!(Test-Path "HKLM:\SOFTWARE\Microsoft\WcmSvc\wifinetworkmanager\config")) {
-        New-Item -Path "HKLM:\SOFTWARE\Microsoft\WcmSvc\wifinetworkmanager\config" -Force | Out-Null
-    }
+    createRegistryEntry("HKLM:\SOFTWARE\Microsoft\WcmSvc\wifinetworkmanager\config")
     New-ItemProperty -Force -Path "HKLM:\SOFTWARE\Microsoft\WcmSvc\wifinetworkmanager\config" -Name "AutoConnectAllowedOEM" -PropertyType DWord -Value 0 | Out-Null
     New-ItemProperty -Force -Path "HKLM:\SOFTWARE\Microsoft\WcmSvc\wifinetworkmanager\config" -Name "WiFISenseAllowed" -PropertyType DWord -Value 0 | Out-Null
 }
@@ -199,9 +179,7 @@ Function DisableWiFiSense {
 Function DisableSmartScreen {
     Write-Output "Disabling SmartScreen Filter..."
     New-ItemProperty -Force -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\System" -Name "EnableSmartScreen" -PropertyType DWord -Value 0 | Out-Null
-    If (!(Test-Path "HKLM:\SOFTWARE\Policies\Microsoft\MicrosoftEdge\PhishingFilter")) {
-        New-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\MicrosoftEdge\PhishingFilter" -Force | Out-Null
-    }
+    createRegistryEntry("HKLM:\SOFTWARE\Policies\Microsoft\MicrosoftEdge\PhishingFilter")
     New-ItemProperty -Force -Path "HKLM:\SOFTWARE\Policies\Microsoft\MicrosoftEdge\PhishingFilter" -Name "EnabledV9" -PropertyType DWord -Value 0 | Out-Null
 }
 
@@ -209,9 +187,7 @@ Function DisableWebSearch {
     Write-Output "Disabling Bing Search in Start Menu..."
     New-ItemProperty -Force -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Search" -Name "BingSearchEnabled" -PropertyType DWord -Value 0 | Out-Null
     New-ItemProperty -Force -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Search" -Name "CortanaConsent" -PropertyType DWord -Value 0 | Out-Null
-    If (!(Test-Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Windows Search")) {
-        New-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Windows Search" -Force | Out-Null
-    }
+    createRegistryEntry("HKLM:\SOFTWARE\Policies\Microsoft\Windows\Windows Search")
     New-ItemProperty -Force -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Windows Search" -Name "DisableWebSearch" -PropertyType DWord -Value 1 | Out-Null
 }
 
@@ -232,9 +208,7 @@ Function DisableAppSuggestions {
     New-ItemProperty -Force -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" -Name "SubscribedContent-353696Enabled" -PropertyType DWord -Value 0 | Out-Null
     New-ItemProperty -Force -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" -Name "SubscribedContent-353698Enabled" -PropertyType DWord -Value 0 | Out-Null
     New-ItemProperty -Force -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" -Name "SystemPaneSuggestionsEnabled" -PropertyType DWord -Value 0 | Out-Null
-    If (!(Test-Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\CloudContent")) {
-        New-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\CloudContent" -Force | Out-Null
-    }
+    createRegistryEntry("HKLM:\SOFTWARE\Policies\Microsoft\Windows\CloudContent")
     New-ItemProperty -Force -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\CloudContent" -Name "DisableWindowsConsumerFeatures" -PropertyType DWord -Value 1 | Out-Null
     # Empty placeholder tile collection in registry cache and restart Start Menu process to reload the cache
     If ([System.Environment]::OSVersion.Version.Build -ge 17134) {
@@ -261,18 +235,14 @@ Function DisableBackgroundApps {
 
 Function DisableLocation {
     Write-Output "Disabling location services..."
-    If (!(Test-Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\LocationAndSensors")) {
-        New-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\LocationAndSensors" -Force | Out-Null
-    }
+    createRegistryEntry("HKLM:\SOFTWARE\Policies\Microsoft\Windows\LocationAndSensors")
     New-ItemProperty -Force -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\LocationAndSensors" -Name "DisableLocation" -PropertyType DWord -Value 1 | Out-Null
     New-ItemProperty -Force -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\LocationAndSensors" -Name "DisableLocationScripting" -PropertyType DWord -Value 1 | Out-Null
 }
 
 Function DisableFeedback {
     Write-Output "Disabling Feedback..."
-    If (!(Test-Path "HKCU:\Software\Microsoft\Siuf\Rules")) {
-        New-Item -Path "HKCU:\Software\Microsoft\Siuf\Rules" -Force | Out-Null
-    }
+    createRegistryEntry("HKCU:\Software\Microsoft\Siuf\Rules")
     New-ItemProperty -Force -Path "HKCU:\Software\Microsoft\Siuf\Rules" -Name "NumberOfSIUFInPeriod" -PropertyType DWord -Value 0 | Out-Null
     New-ItemProperty -Force -Path "HKCU:\Software\Microsoft\Siuf\Rules" -Name "PeriodInNanoSeconds" -PropertyType DWord -Value 0 | Out-Null
     New-ItemProperty -Force -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\DataCollection" -Name "DoNotShowFeedbackNotifications" -PropertyType DWord -Value 1 | Out-Null
@@ -282,41 +252,29 @@ Function DisableFeedback {
 
 Function DisableTailoredExperiences {
     Write-Output "Disabling Tailored Experiences..."
-    If (!(Test-Path "HKCU:\Software\Policies\Microsoft\Windows\CloudContent")) {
-        New-Item -Path "HKCU:\Software\Policies\Microsoft\Windows\CloudContent" -Force | Out-Null
-    }
+    createRegistryEntry("HKCU:\Software\Policies\Microsoft\Windows\CloudContent")
     New-ItemProperty -Force -Path "HKCU:\Software\Policies\Microsoft\Windows\CloudContent" -Name "DisableTailoredExperiencesWithDiagnosticData" -PropertyType DWord -Value 1 | Out-Null
 }
 
 Function DisableAdvertisingID {
     Write-Output "Disabling Advertising ID..."
-    If (!(Test-Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\AdvertisingInfo")) {
-        New-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\AdvertisingInfo" | Out-Null
-    }
+    createRegistryEntry("HKLM:\SOFTWARE\Policies\Microsoft\Windows\AdvertisingInfo")
     New-ItemProperty -Force -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\AdvertisingInfo" -Name "DisabledByGroupPolicy" -PropertyType DWord -Value 1 | Out-Null
 }
 
 Function DisableCortana {
     New-ItemProperty -Force -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Search" -Name "CortanaEnabled" -PropertyType DWord -Value 0 | Out-Null
     Write-Output "Disabling Cortana..."
-    If (!(Test-Path "HKCU:\Software\Microsoft\Personalization\Settings")) {
-        New-Item -Path "HKCU:\Software\Microsoft\Personalization\Settings" -Force | Out-Null
-    }
+    createRegistryEntry("HKCU:\Software\Microsoft\Personalization\Settings")
     New-ItemProperty -Force -Path "HKCU:\Software\Microsoft\Personalization\Settings" -Name "AcceptedPrivacyPolicy" -PropertyType DWord -Value 0 | Out-Null
-    If (!(Test-Path "HKCU:\Software\Microsoft\InputPersonalization\TrainedDataStore")) {
-        New-Item -Path "HKCU:\Software\Microsoft\InputPersonalization\TrainedDataStore" -Force | Out-Null
-    }
+    createRegistryEntry("HKCU:\Software\Microsoft\InputPersonalization\TrainedDataStore")
     New-ItemProperty -Force -Path "HKCU:\Software\Microsoft\InputPersonalization" -Name "RestrictImplicitTextCollection" -PropertyType DWord -Value 1 | Out-Null
     New-ItemProperty -Force -Path "HKCU:\Software\Microsoft\InputPersonalization" -Name "RestrictImplicitInkCollection" -PropertyType DWord -Value 1 | Out-Null
     New-ItemProperty -Force -Path "HKCU:\Software\Microsoft\InputPersonalization\TrainedDataStore" -Name "HarvestContacts" -PropertyType DWord -Value 0 | Out-Null
     New-ItemProperty -Force -Path "HKLM:\SOFTWARE\Microsoft\PolicyManager\default\Experience\AllowCortana" -Name "Value" -PropertyType DWord -Value 0 | Out-Null
-    If (!(Test-Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Windows Search")) {
-        New-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Windows Search" -Force | Out-Null
-    }
+    createRegistryEntry("HKLM:\SOFTWARE\Policies\Microsoft\Windows\Windows Search")
     New-ItemProperty -Force -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Windows Search" -Name "AllowCortana" -PropertyType DWord -Value 0 | Out-Null
-    If (!(Test-Path "HKLM:\SOFTWARE\Policies\Microsoft\InputPersonalization")) {
-        New-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\InputPersonalization" -Force | Out-Null
-    }
+    createRegistryEntry("HKLM:\SOFTWARE\Policies\Microsoft\InputPersonalization")
     New-ItemProperty -Force -Path "HKLM:\SOFTWARE\Policies\Microsoft\InputPersonalization" -Name "AllowInputPersonalization" -PropertyType DWord -Value 0 | Out-Null
 }
 
@@ -329,9 +287,7 @@ Function DisableErrorReporting {
 Function SetP2PUpdateDisable {
     Write-Output "Disabling Windows Update P2P optimization..."
     # Method used since 1511
-    If (!(Test-Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\DeliveryOptimization")) {
-        New-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\DeliveryOptimization" | Out-Null
-    }
+    createRegistryEntry("HKLM:\SOFTWARE\Policies\Microsoft\Windows\DeliveryOptimization")
     New-ItemProperty -Force -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\DeliveryOptimization" -Name "DODownloadMode" -PropertyType DWord -Value 100 | Out-Null
 }
 
@@ -349,9 +305,7 @@ Function DisableWAPPush {
 
 Function DisableRecentFiles {
     Write-Output "Disabling recent files lists..."
-    If (!(Test-Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer")) {
-        New-Item -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer" | Out-Null
-    }
+    createRegistryEntry("HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer")
     New-ItemProperty -Force -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer" -Name "NoRecentDocsHistory" -PropertyType DWord -Value 1 | Out-Null
 }
 
@@ -381,9 +335,7 @@ Function DisableConnectionSharing {
 
 Function DisableDefenderCloud {
     Write-Output "Disabling Windows Defender Cloud..."
-    If (!(Test-Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows Defender\Spynet")) {
-        New-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows Defender\Spynet" -Force | Out-Null
-    }
+    createRegistryEntry("HKLM:\SOFTWARE\Policies\Microsoft\Windows Defender\Spynet")
     New-ItemProperty -Force -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows Defender\Spynet" -Name "SpynetReporting" -PropertyType DWord -Value 0 | Out-Null
     New-ItemProperty -Force -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows Defender\Spynet" -Name "SubmitSamplesConsent" -PropertyType DWord -Value 2 | Out-Null
 }
@@ -409,18 +361,14 @@ Function DisableRecoveryAndReset {
 # # # # # # # # # # # #
 Function DisableMaintenanceWakeUp {
     Write-Output "Disabling nightly wake-up for Automatic Maintenance..."
-    If (!(Test-Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU")) {
-        New-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU" -Force | Out-Null
-    }
+    createRegistryEntry("HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU")
     New-ItemProperty -Force -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU" -Name "AUPowerManagement" -PropertyType DWord -Value 0 | Out-Null
     New-ItemProperty -Force -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\Maintenance" -Name "WakeUp" -PropertyType DWord -Value 0 | Out-Null
 }
 
 Function DisableSharedExperiences {
     Write-Output "Disabling Shared Experiences..."
-    If (!(Test-Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\CDP")) {
-        New-Item -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\CDP" | Out-Null
-    }
+    createRegistryEntry("HKCU:\Software\Microsoft\Windows\CurrentVersion\CDP")
     New-ItemProperty -Force -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\CDP" -Name "RomeSdkChannelUserAuthzPolicy" -PropertyType DWord -Value 0 | Out-Null
 }
 
@@ -431,9 +379,7 @@ Function DisableRemoteAssistance {
 
 Function DisableAutorun {
     Write-Output "Disabling Autorun for all drives..."
-    If (!(Test-Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer")) {
-        New-Item -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer" | Out-Null
-    }
+    createRegistryEntry("HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer")
     New-ItemProperty -Force -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer" -Name "NoDriveTypeAutoRun" -PropertyType DWord -Value 255 | Out-Null
 }
 
@@ -461,9 +407,7 @@ Function DisableSuperfetch {
 Function EnableHibernation {
     Write-Output "Enabling Hibernation..."
     New-ItemProperty -Force -Path "HKLM:\System\CurrentControlSet\Control\Session Manager\Power" -Name "HibernateEnabled" -PropertyType DWord -Value 1 | Out-Null
-    If (!(Test-Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FlyoutMenuSettings")) {
-        New-Item -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FlyoutMenuSettings" | Out-Null
-    }
+    createRegistryEntry("HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FlyoutMenuSettings")
     New-ItemProperty -Force -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FlyoutMenuSettings" -Name "ShowHibernateOption" -PropertyType DWord -Value 1 | Out-Null
     powercfg /HIBERNATE ON 2>&1 | Out-Null
 }
@@ -513,9 +457,7 @@ Function ShowTaskManagerDetails {
 
 Function ShowFileOperationsDetails {
     Write-Output "Showing file operations details..."
-    If (!(Test-Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\OperationStatusManager")) {
-        New-Item -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\OperationStatusManager" | Out-Null
-    }
+    createRegistryEntry("HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\OperationStatusManager")
     New-ItemProperty -Force -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\OperationStatusManager" -Name "EnthusiastMode" -PropertyType DWord -Value 1 | Out-Null
 }
 
@@ -526,17 +468,13 @@ Function HideTaskbarSearch {
 
 Function HideTaskbarPeopleIcon {
     Write-Output "Hiding People icon..."
-    If (!(Test-Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced\People")) {
-        New-Item -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced\People" | Out-Null
-    }
+    createRegistryEntry("HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced\People")
     New-ItemProperty -Force -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced\People" -Name "PeopleBand" -PropertyType DWord -Value 0 | Out-Null
 }
 
 Function HideRecentlyAddedApps {
     Write-Output "Hiding 'Recently added' list from the Start Menu..."
-    If (!(Test-Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Explorer")) {
-        New-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Explorer" | Out-Null
-    }
+    createRegistryEntry("HKLM:\SOFTWARE\Policies\Microsoft\Windows\Explorer")
     New-ItemProperty -Force -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Explorer" -Name "HideRecentlyAddedApps" -PropertyType DWord -Value 1 | Out-Null
 }
 Function UnpinTaskbarIcons {
@@ -562,13 +500,9 @@ Function EnableVerboseStatus {
 
 Function DisableF1HelpKey {
     Write-Output "Disabling F1 Help key..."
-    If (!(Test-Path "HKCU:\Software\Classes\TypeLib\{8cec5860-07a1-11d9-b15e-000d56bfe6ee}\1.0\0\win32")) {
-        New-Item -Path "HKCU:\Software\Classes\TypeLib\{8cec5860-07a1-11d9-b15e-000d56bfe6ee}\1.0\0\win32" -Force | Out-Null
-    }
+    createRegistryEntry("HKCU:\Software\Classes\TypeLib\{8cec5860-07a1-11d9-b15e-000d56bfe6ee}\1.0\0\win32")
     New-ItemProperty -Force -Path "HKCU:\Software\Classes\TypeLib\{8cec5860-07a1-11d9-b15e-000d56bfe6ee}\1.0\0\win32" -Name "(Default)" -PropertyType "String" -Value "" | Out-Null
-    If (!(Test-Path "HKCU:\Software\Classes\TypeLib\{8cec5860-07a1-11d9-b15e-000d56bfe6ee}\1.0\0\win64")) {
-        New-Item -Path "HKCU:\Software\Classes\TypeLib\{8cec5860-07a1-11d9-b15e-000d56bfe6ee}\1.0\0\win64" -Force | Out-Null
-    }
+    createRegistryEntry("HKCU:\Software\Classes\TypeLib\{8cec5860-07a1-11d9-b15e-000d56bfe6ee}\1.0\0\win64")
     New-ItemProperty -Force -Path "HKCU:\Software\Classes\TypeLib\{8cec5860-07a1-11d9-b15e-000d56bfe6ee}\1.0\0\win64" -Name "(Default)" -PropertyType "String" -Value "" | Out-Null
 }
 
@@ -607,13 +541,9 @@ Function SetExplorerThisPC {
 
 Function ShowUserFolderOnDesktop {
     Write-Output "Showing User Folder shortcut on desktop..."
-    If (!(Test-Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\ClassicStartMenu")) {
-        New-Item -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\ClassicStartMenu" -Force | Out-Null
-    }
+    createRegistryEntry("HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\ClassicStartMenu")
     New-ItemProperty -Force -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\ClassicStartMenu" -Name "{59031a47-3f72-44a7-89c5-5595fe6b30ee}" -PropertyType DWord -Value 0 | Out-Null
-    If (!(Test-Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\NewStartPanel")) {
-        New-Item -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\NewStartPanel" -Force | Out-Null
-    }
+    createRegistryEntry("HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\NewStartPanel")
     New-ItemProperty -Force -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\NewStartPanel" -Name "{59031a47-3f72-44a7-89c5-5595fe6b30ee}" -PropertyType DWord -Value 0 | Out-Null
 }
 
@@ -779,9 +709,7 @@ Function DisableXboxFeatures {
     Get-AppxPackage "Microsoft.Xbox.TCUI" | Remove-AppxPackage
     New-ItemProperty -Force -Path "HKCU:\Software\Microsoft\GameBar" -Name "GameDVR_Enabled" -PropertyType DWord -Value 0 | Out-Null
     New-ItemProperty -Force -Path "HKCU:\System\GameConfigStore" -Name "GameDVR_Enabled" -PropertyType DWord -Value 0 | Out-Null
-    If (!(Test-Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\GameDVR")) {
-        New-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\GameDVR" | Out-Null
-    }
+    createRegistryEntry("HKLM:\SOFTWARE\Policies\Microsoft\Windows\GameDVR")
     New-ItemProperty -Force -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\GameDVR" -Name "AllowGameDVR" -Type DWord -Value 0 | Out-Null
 }
 
@@ -795,13 +723,9 @@ Function EnableFullscreenOptims {
 
 Function DisableEdgePreload {
     Write-Output "Disabling Edge preload..."
-    If (!(Test-Path "HKLM:\SOFTWARE\Policies\Microsoft\MicrosoftEdge\Main")) {
-        New-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\MicrosoftEdge\Main" -Force | Out-Null
-    }
+    createRegistryEntry("HKLM:\SOFTWARE\Policies\Microsoft\MicrosoftEdge\Main")
     New-ItemProperty -Force -Path "HKLM:\SOFTWARE\Policies\Microsoft\MicrosoftEdge\Main" -Name "AllowPrelaunch" -PropertyType DWord -Value 0 | Out-Null
-    If (!(Test-Path "HKLM:\SOFTWARE\Policies\Microsoft\MicrosoftEdge\TabPreloader")) {
-        New-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\MicrosoftEdge\TabPreloader" -Force | Out-Null
-    }
+    createRegistryEntry("HKLM:\SOFTWARE\Policies\Microsoft\MicrosoftEdge\TabPreloader")
     New-ItemProperty -Force -Path "HKLM:\SOFTWARE\Policies\Microsoft\MicrosoftEdge\TabPreloader" -Name "AllowTabPreloading" -PropertyType DWord -Value 0 | Out-Null
 }
 
@@ -812,9 +736,7 @@ Function DisableEdgeShortcutCreation {
 
 Function DisableMediaSharing {
     Write-Output "Disabling media sharing..."
-    If (!(Test-Path "HKLM:\SOFTWARE\Policies\Microsoft\WindowsMediaPlayer")) {
-        New-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\WindowsMediaPlayer" -Force | Out-Null
-    }
+    createRegistryEntry("HKLM:\SOFTWARE\Policies\Microsoft\WindowsMediaPlayer")
     New-ItemProperty -Force -Path "HKLM:\SOFTWARE\Policies\Microsoft\WindowsMediaPlayer" -Name "PreventLibrarySharing" -PropertyType DWord -Value 1 | Out-Null
 }
 
@@ -1127,4 +1049,12 @@ function addToUserPath($pathToAdd) {
     Write-Output "Adding $pathToAdd to user level PATH variable... 🔄"
     $newPath = $userPath + ";" + $pathToAdd
     [System.Environment]::SetEnvironmentVariable("PATH", $newPath, [System.EnvironmentVariableTarget]::User)
+}
+
+# createRegistryEntry creates a registry entry at $path if it does not exist.
+function createRegistryEntry($path) {
+    If ((Test-Path $path)) {
+        return
+    }
+    New-Item -Path $path | Out-Null
 }
