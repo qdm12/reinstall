@@ -907,7 +907,7 @@ function InstallChocoPackages {
     # ISO manipulation
     choco install reflect-free rufus imgburn ventoy
     # Office documents
-    choco install libreoffice
+    choco install libreoffice-fresh
     # Gaming
     choco install logitechgaming steam origin epicgameslauncher
 }
