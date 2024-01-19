@@ -889,7 +889,7 @@ function InstallChocoPackages {
     # Windows tweaks
     choco install shutup10
     # Other useful programs
-    choco install ccleaner vlc treesizefree
+    choco install ccleaner vlc treesizefree autohotkey recuva teracopy veracrypt
     # Video editing
     choco install ffmpeg mediainfo handbrake mkvtoolnix MakeMKV shotcut obs-studio lossless-cut
     # Image editing
