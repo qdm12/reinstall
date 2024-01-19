@@ -105,7 +105,7 @@
 
 ### 3. Further setup
 
-1. Log in to machine with `ssh root@192.168.2.2` using the root password set.
+1. Log in to machine with `ssh root@10.10.10.2` using the root password set.
 1. Use:
 
     ```sh
@@ -187,8 +187,8 @@
 - Use Dialog for interactive menus
 - Dialog menu for ZFS creation
 - In `.profile`:
-    - **Volume health with ZFS**
-    - CPU temperature, HDDs temperature
-    - OpenSSH version
-    - Ram usage of Docker
-    - Loading spinner
+  - **Volume health with ZFS**
+  - CPU temperature, HDDs temperature
+  - OpenSSH version
+  - Ram usage of Docker
+  - Loading spinner

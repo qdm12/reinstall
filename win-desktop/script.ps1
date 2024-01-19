@@ -964,34 +964,34 @@ function SetupNFS {
     New-ItemProperty -Force -Path "HKLM:\SOFTWARE\Microsoft\ClientForNFS\CurrentVersion\Default" -Name "AnonymousUid" -PropertyType DWord -Value 0  | Out-Null
     New-ItemProperty -Force -Path "HKLM:\SOFTWARE\Microsoft\ClientForNFS\CurrentVersion\Default" -Name "AnonymousGid" -PropertyType DWord -Value 0  | Out-Null
     Write-Output "echo Mounting NFS shares...
-mount -o anon \\192.168.2.2\shares\software *
-mount -o anon \\192.168.2.2\shares\temp *
-mount -o anon \\192.168.2.2\shares\logs *
-mount -o anon \\192.168.2.2\shares\remote *
-mount -o anon \\192.168.2.2\shares\games *
-mount -o anon \\192.168.2.2\shares\databases *
-mount -o anon \\192.168.2.2\shares\cache *
-mount -o anon \\192.168.2.2\shares\code *
-mount -o anon \\192.168.2.2\shares\series *
-mount -o anon \\192.168.2.2\shares\movies *
-mount -o anon \\192.168.2.2\shares\torrents *
-mount -o anon \\192.168.2.2\shares\perso *
-mount -o anon \\192.168.2.2\shares\dockerdata *
-mount -o anon \\192.168.2.2\shares\docker *" | Out-File -FilePath "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Startup\nfs.bat"
-    cmd /c "mount -o anon \\192.168.2.2\shares\software *"
-    cmd /c "mount -o anon \\192.168.2.2\shares\temp *"
-    cmd /c "mount -o anon \\192.168.2.2\shares\logs *"
-    cmd /c "mount -o anon \\192.168.2.2\shares\remote *"
-    cmd /c "mount -o anon \\192.168.2.2\shares\games *"
-    cmd /c "mount -o anon \\192.168.2.2\shares\databases *"
-    cmd /c "mount -o anon \\192.168.2.2\shares\cache *"
-    cmd /c "mount -o anon \\192.168.2.2\shares\code *"
-    cmd /c "mount -o anon \\192.168.2.2\shares\series *"
-    cmd /c "mount -o anon \\192.168.2.2\shares\movies *"
-    cmd /c "mount -o anon \\192.168.2.2\shares\torrents *"
-    cmd /c "mount -o anon \\192.168.2.2\shares\perso *"
-    cmd /c "mount -o anon \\192.168.2.2\shares\dockerdata *"
-    cmd /c "mount -o anon \\192.168.2.2\shares\docker *"
+mount -o anon \\10.10.10.2\shares\software *
+mount -o anon \\10.10.10.2\shares\temp *
+mount -o anon \\10.10.10.2\shares\logs *
+mount -o anon \\10.10.10.2\shares\remote *
+mount -o anon \\10.10.10.2\shares\games *
+mount -o anon \\10.10.10.2\shares\databases *
+mount -o anon \\10.10.10.2\shares\cache *
+mount -o anon \\10.10.10.2\shares\code *
+mount -o anon \\10.10.10.2\shares\series *
+mount -o anon \\10.10.10.2\shares\movies *
+mount -o anon \\10.10.10.2\shares\torrents *
+mount -o anon \\10.10.10.2\shares\perso *
+mount -o anon \\10.10.10.2\shares\dockerdata *
+mount -o anon \\10.10.10.2\shares\docker *" | Out-File -FilePath "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Startup\nfs.bat"
+    cmd /c "mount -o anon \\10.10.10.2\shares\software *"
+    cmd /c "mount -o anon \\10.10.10.2\shares\temp *"
+    cmd /c "mount -o anon \\10.10.10.2\shares\logs *"
+    cmd /c "mount -o anon \\10.10.10.2\shares\remote *"
+    cmd /c "mount -o anon \\10.10.10.2\shares\games *"
+    cmd /c "mount -o anon \\10.10.10.2\shares\databases *"
+    cmd /c "mount -o anon \\10.10.10.2\shares\cache *"
+    cmd /c "mount -o anon \\10.10.10.2\shares\code *"
+    cmd /c "mount -o anon \\10.10.10.2\shares\series *"
+    cmd /c "mount -o anon \\10.10.10.2\shares\movies *"
+    cmd /c "mount -o anon \\10.10.10.2\shares\torrents *"
+    cmd /c "mount -o anon \\10.10.10.2\shares\perso *"
+    cmd /c "mount -o anon \\10.10.10.2\shares\dockerdata *"
+    cmd /c "mount -o anon \\10.10.10.2\shares\docker *"
 }
 
 function Shutup10 {
