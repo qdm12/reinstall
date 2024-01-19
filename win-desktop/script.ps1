@@ -873,7 +873,7 @@ function InstallChocoPackages {
     # Compression
     choco install 7zip
     # Terminal
-    choco install git microsoft-windows-terminal powershell-core
+    choco install git microsoft-windows-terminal nushell powershell-core
     # Browser
     choco install firefox
     # File editing

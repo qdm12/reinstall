@@ -820,7 +820,7 @@ function InstallChocoPackages {
     choco install shutup10
     choco install 7zip firefox ccleaner vlc obs-studio
     choco install ddu msiafterburner steam
-    choco install powershell-core vscode
+    choco install nushell vscode
 }
 
 function CleanContextMenu {
