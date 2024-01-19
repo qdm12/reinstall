@@ -10,6 +10,11 @@ Setup Windows 10 with tweaks, configurations and Docker everything.
 1. Install all drivers (Nvidia too)
 1. Reboot
 
+TODO:
+
+- Replace choco with winget
+- Replace powershell with nushell
+
 ## Run the script
 
 Right click on script.ps1 and select Run with Powershell
@@ -18,16 +23,16 @@ Right click on script.ps1 and select Run with Powershell
 
 - Login to Firefox and set Firefox as default browser
 - Indexing locations (open indexing window)
-    - `C:\%USERPFORFILE%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs`
-    - `C:\ProgramData\chocolatey\bin`
+  - `C:\%USERPFORFILE%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs`
+  - `C:\ProgramData\chocolatey\bin`
 - Winrar Context menu
 - Login and configuration of Docker Desktop
 - [MakeMKV key](https://makemkv.com/forum/viewtopic.php?f=5&t=1053)
 - Setup bluetooth devices
-    - Headset
-    - Earset
-    - Keyboard
-    - Mouse
+  - Headset
+  - Earset
+  - Keyboard
+  - Mouse
 - Setup Wifi devices
     - Xbox Controller
 
@@ -55,8 +60,8 @@ Right click on script.ps1 and select Run with Powershell
 ### Sometime
 
 - Wincreds
-    - Docker
-    - Samba
+  - Docker
+  - Samba
 - Hashcat
 - Docker in Arch WSL 2 (when released)
 - Periodic `choco install malwarebytes --force`
