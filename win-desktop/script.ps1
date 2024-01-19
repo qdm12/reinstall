@@ -909,7 +909,7 @@ function InstallChocoPackages {
     # Office documents
     choco install libreoffice-fresh
     # Gaming
-    choco install logitechgaming steam origin epicgameslauncher
+    choco install steam origin epicgameslauncher dolphin vortex
 }
 
 function CleanContextMenu {
