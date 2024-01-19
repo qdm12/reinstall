@@ -895,7 +895,7 @@ function InstallChocoPackages {
     # Image editing
     choco install InkScape photofiltre7 gimp
     # Audio editing
-    choco install lame audacity
+    choco install lame audacity mp3directcut eac
     # Networking
     choco install wireguard parsec shadowsocks filezilla
     # Screenshots
