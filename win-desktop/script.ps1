@@ -905,7 +905,7 @@ function InstallChocoPackages {
     # Download
     choco install yt-dlp qbittorrent
     # ISO manipulation
-    choco install reflect-free rufus imgburn
+    choco install reflect-free rufus imgburn ventoy
     # Office documents
     choco install libreoffice
     # Gaming
