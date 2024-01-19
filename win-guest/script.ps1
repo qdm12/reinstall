@@ -855,7 +855,6 @@ function CleanContextMenu {
 
 function CleanStartup {
     Write-Output "Cleaning up startup programs..."
-    Remove-ItemProperty -path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" -Name Discord -ErrorAction SilentlyContinue
     Remove-ItemProperty -path 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Run' -Name Steam
 }
 
