@@ -850,10 +850,7 @@ function MorePrivacyTweaks {
 }
 
 function CustomizePath {
-    Write-Output "Customizing path..."
-    $oldpath = (Get-ItemProperty -Path 'Registry::HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Session Manager\Environment' -Name PATH).path
-    $newpath = "$oldpath;E:\Work\github\derivatex\"
-    Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Session Manager\Environment' -Name PATH -Value $newPath
+    addToUserPath("E:\Work\github\derivatex\")
 }
 
 function InstallChocolatey {
@@ -1112,3 +1109,22 @@ function OpenManualWindows {
 }
 
 $tweaks | ForEach-Object { Invoke-Expression $_ }
+
+##########################
+## Utility functions below
+##########################
+
+
+# addToUserPath adds the $pathToAdd to the user level PATH variable and persist it,
+# if it is not already present in the user or system PATH variable.
+function addToUserPath($pathToAdd) {
+    $systemPath = [System.Environment]::GetEnvironmentVariable("PATH", [System.EnvironmentVariableTarget]::Machine)
+    $userPath = [System.Environment]::GetEnvironmentVariable("PATH", [System.EnvironmentVariableTarget]::User)
+    if ($systemPath -split ";" -contains $pathToAdd -or $userPath -split ";" -contains $pathToAdd) {
+        Write-Output "$pathToAdd is already in PATH variable ✅"
+        return
+    }
+    Write-Output "Adding $pathToAdd to user level PATH variable... 🔄"
+    $newPath = $userPath + ";" + $pathToAdd
+    [System.Environment]::SetEnvironmentVariable("PATH", $newPath, [System.EnvironmentVariableTarget]::User)
+}
