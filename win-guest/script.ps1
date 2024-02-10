@@ -116,6 +116,7 @@ $tweaks = @(
     "QuickAccessPinning",
     # "TaskbarPinning",
     # "SetFileExtensions",
+    "FixInternetChecks",
     "Shutup10",
     "InstallPsCorePackages",
     # "InstallEXEs",
@@ -822,6 +823,16 @@ function TaskbarPinning {
 function SetFileExtensions {
     Write-Output "Setting file extensions mapping..."
     regedit /S fileexts.reg
+}
+
+function FixInternetChecks {
+    Write-Output "Fixing internet checks configuration..."
+    New-ItemProperty -Force -Path "HKLM:\SYSTEM\CurrentControlSet\Services\NlaSvc\Parameters\Internet" -Name "ActiveDnsProbeContent" -PropertyType String -Value "1.0.0.1"  | Out-Null
+    New-ItemProperty -Force -Path "HKLM:\SYSTEM\CurrentControlSet\Services\NlaSvc\Parameters\Internet" -Name "ActiveDnsProbeContentV6" -PropertyType String -Value "2001:4860:4860::8844"  | Out-Null
+    New-ItemProperty -Force -Path "HKLM:\SYSTEM\CurrentControlSet\Services\NlaSvc\Parameters\Internet" -Name "ActiveDnsProbeHost" -PropertyType String -Value "dns.google"  | Out-Null
+    New-ItemProperty -Force -Path "HKLM:\SYSTEM\CurrentControlSet\Services\NlaSvc\Parameters\Internet" -Name "ActiveDnsProbeHostV6" -PropertyType String -Value "dns.google"  | Out-Null
+    New-ItemProperty -Force -Path "HKLM:\SYSTEM\CurrentControlSet\Services\NlaSvc\Parameters\Internet" -Name "ActiveWebProbeHostV6" -PropertyType String -Value "www.msftconnecttest.com"  | Out-Null
+    New-ItemProperty -Force -Path "HKLM:\SYSTEM\CurrentControlSet\Services\NlaSvc\Parameters\Internet" -Name "EnableActiveProbing" -PropertyType DWord -Value 1  | Out-Null
 }
 
 function Shutup10 {
